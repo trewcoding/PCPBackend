@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiClients.DTOS
+namespace DataAccess.EfModels
 {
-    public class ProductDto
+    public class ProductEF
     {
         [JsonProperty("productId")]
         public string ProductId { get; set; }
@@ -43,6 +43,6 @@ namespace ApiClients.DTOS
         public string ApplicationUri { get; set; }
 
         [JsonProperty("additionalInformation")]
-        public AdditionalInformationDto AdditionalInformation { get; set; }
+        public AdditionalInformationEF AdditionalInformation { get; set; }
     }
 }

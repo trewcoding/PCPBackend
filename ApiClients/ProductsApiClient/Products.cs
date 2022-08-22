@@ -1,6 +1,7 @@
 ﻿using ApiClients.DTOS;
 using ApiClients.ProductsApiClient.IProductsApiClient;
 using DataAccess.EfModels;
+using Domain.Entities;
 using Microsoft.Extensions.Logging;
 using System.Net.Http.Json;
 
