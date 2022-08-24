@@ -11,15 +11,20 @@ namespace API.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly IProducts _products;
-        public ProductsController(IProducts products)
+        private readonly IDataAccessLayer _dataAccessLayer;
+
+        public ProductsController(IProducts products, IDataAccessLayer dataAccessLayer)
         {
+
             _products = products;
+            _dataAccessLayer = dataAccessLayer;
         }
 
         [HttpGet(Name = "GetProducts")]
         public async Task<IActionResult> GetProductsCall()
         {
             var result = await _products.GetProducts();
+             await  _dataAccessLayer.SaveProduct(result.Data.Products);
             return Ok(result);
         }
         

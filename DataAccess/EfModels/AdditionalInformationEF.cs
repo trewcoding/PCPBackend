@@ -20,5 +20,7 @@ namespace DataAccess.EfModels
 
         [JsonProperty("feesAndPricingUri")]
         public string FeesAndPricingUri { get; set; }
+        [JsonProperty("productId")]
+        public string ProductId { get; set; }
     }
 }

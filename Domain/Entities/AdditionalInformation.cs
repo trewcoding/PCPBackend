@@ -20,5 +20,7 @@ namespace Domain.Entities
 
         [JsonProperty("feesAndPricingUri")]
         public string FeesAndPricingUri { get; set; }
+        [JsonProperty("id")]
+        public int Id { get; set; }
     }
 }

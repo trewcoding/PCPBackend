@@ -42,7 +42,7 @@ namespace DataAccess.EfModels
         [JsonProperty("applicationUri")]
         public string ApplicationUri { get; set; }
 
-        [JsonProperty("additionalInformation")]
-        public AdditionalInformationEF AdditionalInformation { get; set; }
+        //[JsonProperty("additionalInformation")]
+        //public AdditionalInformationEF AdditionalInformation { get; set; }
     }
 }

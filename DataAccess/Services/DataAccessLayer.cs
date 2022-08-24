@@ -21,14 +21,32 @@ namespace DataAccess.Services
             _dbContext = dbContext;
             _mapper = mapper;
         }
-        public async Task<Guid> SaveProduct(Product product)
+        public async Task<string> SaveProduct(List<Product> products)
         {
-            ProductEF productEF = await _dbContext.ProductsDataSet.SingleOrDefaultAsync(p => p.ProductId == product.ProductId);
-            if (productEF != null)
+            //productEF =  _dbContext.ProductsDataSet.in(x=>x.ProductId.Equals())
+            // ProductEF productEF = null;
+
+            //if (productEF != null)
+            //{
+            //    throw new Exception();
+            //}
+            foreach (var item in products)
             {
-                throw new Exception();
+                var product = await  _dbContext.ProductsDataSet.FirstOrDefaultAsync(x => x.ProductId.Equals(item.ProductId));
+                if (product == null)
+                {
+                    var mappedValue = _mapper.Map<ProductEF>(item);
+                    _dbContext.ProductsDataSet.Add(mappedValue);
+                }
+                else
+                {
+                    product.Brand = item.Brand;
+                }
             }
-            return _mapper.Map<Product>(productEF);
+           
+            await _dbContext.SaveChangesAsync();
+            //return mappedValue.ProductId;
+            return String.Empty;
             
         }
     }

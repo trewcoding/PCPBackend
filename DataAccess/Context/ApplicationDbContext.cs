@@ -19,7 +19,8 @@ namespace DataAccess.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ProductEF>().ToTable("Products").HasKey(p => p.ProductId);
+            modelBuilder.HasDefaultSchema(schema).Entity<ProductEF>().ToTable("Products").HasKey(p => p.ProductId);
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
