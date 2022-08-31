@@ -1,14 +1,25 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DataAccess.EfModels.ProductsCommBank;
+using Newtonsoft.Json;
 
-namespace Domain.Entities
+namespace ApiClients.DTOS.ProductCommBank
 {
-    public class Product
+    public class ProductDataDto
     {
+        [JsonProperty("features")]
+        public List<ProductFeatureDto> Features { get; set; }
+
+        [JsonProperty("constraints")]
+        public List<ProductConstraintDto> Constraints { get; set; }
+
+        [JsonProperty("eligibility")]
+        public List<ProductEligibilityDto> Eligibility { get; set; }
+
+        [JsonProperty("fees")]
+        public List<ProductFeeDto> Fees { get; set; }
+
+        [JsonProperty("lendingRates")]
+        public List<ProductLendingRateDto> LendingRates { get; set; }
+
         [JsonProperty("productId")]
         public string ProductId { get; set; }
 
@@ -36,14 +47,13 @@ namespace Domain.Entities
         [JsonProperty("brandName")]
         public string BrandName { get; set; }
 
-        [JsonProperty("isTailored")]
-        public bool IsTailored { get; set; }
-
         [JsonProperty("applicationUri")]
         public string ApplicationUri { get; set; }
 
-        [JsonProperty("additionalInformation")]
-        public AdditionalInformation AdditionalInformation { get; set; }
+        [JsonProperty("isTailored")]
+        public bool IsTailored { get; set; }
 
+        [JsonProperty("additionalInformation")]
+        public ProductAdditionalInformationDto AdditionalInformation { get; set; }
     }
 }

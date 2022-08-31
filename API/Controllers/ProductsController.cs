@@ -1,7 +1,8 @@
-﻿using ApiClients.ProductsApiClient.IProductsApiClient;
-using DataAccess.EfModels;
+﻿
+using DataAccess.EfModels.ProductsCommBank;
 using Microsoft.AspNetCore.Mvc;
 using DataAccess.Services;
+using ApiClients.CommBankApiClient.ProductsApiClient.IProductsApiClient;
 
 namespace API.Controllers
 {
@@ -24,7 +25,7 @@ namespace API.Controllers
         public async Task<IActionResult> GetProductsCall()
         {
             var result = await _products.GetProducts();
-             await  _dataAccessLayer.SaveProduct(result.Data.Products);
+             await  _dataAccessLayer.SaveProducts(result.Data.Products);
             return Ok(result);
         }
         

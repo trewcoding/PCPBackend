@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
-using DataAccess.EfModels;
-using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DataAccess.EfModels.ProductCommBank;
+using DataAccess.EfModels.ProductsCommBank;
+using Domain.Entities.ProductCommBank;
+using Domain.Entities.ProductsCommBank;
 
 namespace Domain.ProductMappings
 {
@@ -13,10 +10,20 @@ namespace Domain.ProductMappings
     {
         public ProductMappings()
         {
-            CreateMap<ProductEF, Product>().ReverseMap();
-            CreateMap<ProductResponseApiEF, ProductResponseApi>().ReverseMap();
+            CreateMap<ProductsEF, Products>().ReverseMap();
+            CreateMap<ProductsResponseApiEF, ProductsResponseApi>().ReverseMap();
             CreateMap<DataEF, Data>().ReverseMap();
             CreateMap<AdditionalInformationEF, AdditionalInformation>().ReverseMap();
+
+            CreateMap<ProductResponseApiEf, ProductResponseApi>().ReverseMap();
+            CreateMap<ProductAdditionalInformationEf, ProductAdditionalInformation>().ReverseMap();
+            CreateMap<ProductConstraintEf, ProductConstraint>().ReverseMap();
+            CreateMap<ProductDataEf, ProductData>().ReverseMap();
+            CreateMap<ProductDiscountEf, ProductDiscount>().ReverseMap();
+            CreateMap<ProductEligibilityEf, ProductEligibility>().ReverseMap();
+            CreateMap<ProductFeatureEf, ProductFeature>().ReverseMap();
+            CreateMap<ProductFeeEf, ProductFee>().ReverseMap();
+            CreateMap<ProductLendingRateEf, ProductLendingRate>().ReverseMap();
         }
     }
 }

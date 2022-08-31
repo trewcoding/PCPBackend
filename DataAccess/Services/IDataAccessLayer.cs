@@ -1,14 +1,9 @@
-﻿using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Domain.Entities.ProductsCommBank;
 
 namespace DataAccess.Services
 {
     public interface IDataAccessLayer
     {
-        Task<string> SaveProduct(List<Product> product);
+        Task<string> SaveProducts(List<Products> product);
     }
 }

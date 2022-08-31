@@ -1,11 +1,9 @@
-﻿using ApiClients.DTOS;
-using ApiClients.ProductsApiClient.IProductsApiClient;
-using DataAccess.EfModels;
-using Domain.Entities;
+﻿using ApiClients.CommBankApiClient.ProductsApiClient.IProductsApiClient;
+using Domain.Entities.ProductsCommBank;
 using Microsoft.Extensions.Logging;
 using System.Net.Http.Json;
 
-namespace ApiClients.ProductsApiClient
+namespace ApiClients.CommBankApiClient.ProductsApiClient
 {
     public class Products : IProducts
     {
@@ -20,14 +18,14 @@ namespace ApiClients.ProductsApiClient
             _logger = logger;
         }
 
-        public async Task<ProductResponseApi> GetProducts()
+        public async Task<ProductsResponseApi> GetProducts()
         {
             string path = Get_Service_Request_Products;
             var response = await _httpClient.GetAsync(path);
             if (response.IsSuccessStatusCode)
             {
                 //await SaveChangesAsync();
-                return await response.Content.ReadFromJsonAsync<ProductResponseApi>();
+                return await response.Content.ReadFromJsonAsync<ProductsResponseApi>();
             }
             throw new Exception();
         }

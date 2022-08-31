@@ -5,11 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiClients.DTOS
+namespace ApiClients.DTOS.ProductsCommBank
 {
-    public class ProductResponseApiDto
+    public class ProductsResponseApiDto
     {
         [JsonProperty("data")]
         public DataDto Data { get; set; }
 
-    }}
+    }
+}

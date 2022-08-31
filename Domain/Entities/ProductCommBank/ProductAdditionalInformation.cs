@@ -1,13 +1,8 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ApiClients.DTOS
+namespace Domain.Entities.ProductCommBank
 {
-    public class AdditionalInformationDto
+    public class ProductAdditionalInformation
     {
         [JsonProperty("overviewUri")]
         public string OverviewUri { get; set; }

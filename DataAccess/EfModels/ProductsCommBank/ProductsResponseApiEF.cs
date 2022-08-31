@@ -5,12 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Entities
+namespace DataAccess.EfModels.ProductsCommBank
 {
-    public class ProductResponseApi
+    public class ProductsResponseApiEF
     {
         [JsonProperty("data")]
-        public Data Data { get; set; }
-
+        public DataEF Data { get; set; }
     }
 }

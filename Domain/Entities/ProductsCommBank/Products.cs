@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.EfModels
+namespace Domain.Entities.ProductsCommBank
 {
-    public class ProductEF
+    public class Products
     {
         [JsonProperty("productId")]
         public string ProductId { get; set; }
@@ -42,7 +42,8 @@ namespace DataAccess.EfModels
         [JsonProperty("applicationUri")]
         public string ApplicationUri { get; set; }
 
-        //[JsonProperty("additionalInformation")]
-        //public AdditionalInformationEF AdditionalInformation { get; set; }
+        [JsonProperty("additionalInformation")]
+        public AdditionalInformation AdditionalInformation { get; set; }
+
     }
 }

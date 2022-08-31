@@ -1,13 +1,8 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Domain.Entities
+namespace DataAccess.EfModels.ProductCommBank
 {
-    public class AdditionalInformation
+    public class ProductAdditionalInformationEf
     {
         [JsonProperty("overviewUri")]
         public string OverviewUri { get; set; }
@@ -20,7 +15,5 @@ namespace Domain.Entities
 
         [JsonProperty("feesAndPricingUri")]
         public string FeesAndPricingUri { get; set; }
-        [JsonProperty("id")]
-        public int Id { get; set; }
     }
 }

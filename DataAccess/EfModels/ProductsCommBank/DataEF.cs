@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApiClients.DTOS
+namespace DataAccess.EfModels.ProductsCommBank
 {
-    public class DataDto
+    public class DataEF
     {
         [JsonProperty("products")]
-        public List<ProductDto> Products { get; set; }
+        public List<ProductsEF> Products { get; set; }
     }
 }

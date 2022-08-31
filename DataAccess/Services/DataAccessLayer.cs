@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using DataAccess.Context;
-using DataAccess.EfModels;
-using Domain.Entities;
+using DataAccess.EfModels.ProductsCommBank;
+using Domain.Entities.ProductsCommBank;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -21,21 +21,14 @@ namespace DataAccess.Services
             _dbContext = dbContext;
             _mapper = mapper;
         }
-        public async Task<string> SaveProduct(List<Product> products)
+        public async Task<string> SaveProducts(List<Products> products)
         {
-            //productEF =  _dbContext.ProductsDataSet.in(x=>x.ProductId.Equals())
-            // ProductEF productEF = null;
-
-            //if (productEF != null)
-            //{
-            //    throw new Exception();
-            //}
             foreach (var item in products)
             {
                 var product = await  _dbContext.ProductsDataSet.FirstOrDefaultAsync(x => x.ProductId.Equals(item.ProductId));
                 if (product == null)
                 {
-                    var mappedValue = _mapper.Map<ProductEF>(item);
+                    var mappedValue = _mapper.Map<ProductsEF>(item);
                     _dbContext.ProductsDataSet.Add(mappedValue);
                 }
                 else
@@ -45,9 +38,9 @@ namespace DataAccess.Services
             }
            
             await _dbContext.SaveChangesAsync();
-            //return mappedValue.ProductId;
             return String.Empty;
             
         }
+
     }
 }
