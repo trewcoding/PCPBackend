@@ -8,7 +8,9 @@ namespace DataAccess.Context
     {
         private const string schema = "dbo";
         public virtual DbSet<ProductsEF> ProductsDataSet { get; set; }
-        public virtual DbSet<ProductDataEf> ProductDataSet { get; set; }
+        public virtual DbSet<ProductDataEfs> ProductDataSet { get; set; }
+        public virtual DbSet<ProductFeatureEf> ProductFeatureDataSet { get; set; }
+        public virtual DbSet<ProductConstraintEf> ProductConstraintDataSet { get; set; }
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
             
@@ -17,7 +19,9 @@ namespace DataAccess.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema(schema).Entity<ProductsEF>().ToTable("Products").HasKey(p => p.ProductId);
-            modelBuilder.HasDefaultSchema(schema).Entity<ProductDataEf>().ToTable("Product").HasKey(p => p.ProductId);
+            modelBuilder.HasDefaultSchema(schema).Entity<ProductDataEfs>().ToTable("Product").HasKey(p => p.ProductId);
+            modelBuilder.HasDefaultSchema(schema).Entity<ProductFeatureEf>().ToTable("ProductFeatures").HasKey(p => p.FeatureId);
+            modelBuilder.HasDefaultSchema(schema).Entity<ProductConstraintEf>().ToTable("ProductConstraint").HasKey(p => p.ConstraintId);
             base.OnModelCreating(modelBuilder);
         }
     }

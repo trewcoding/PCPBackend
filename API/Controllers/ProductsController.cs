@@ -25,7 +25,7 @@ namespace API.Controllers
         public async Task<IActionResult> GetProductsCall()
         {
             var result = await _products.GetProducts();
-             await  _dataAccessLayer.SaveProducts(result.Data.Products);
+            await  _dataAccessLayer.SaveProducts(result.Data.Products);
             return Ok(result);
         }
         

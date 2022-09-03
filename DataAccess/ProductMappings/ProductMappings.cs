@@ -18,7 +18,7 @@ namespace Domain.ProductMappings
             CreateMap<ProductResponseApiEf, ProductResponseApi>().ReverseMap();
             CreateMap<ProductAdditionalInformationEf, ProductAdditionalInformation>().ReverseMap();
             CreateMap<ProductConstraintEf, ProductConstraint>().ReverseMap();
-            CreateMap<ProductDataEf, ProductData>().ReverseMap();
+            CreateMap<ProductDataEfs, ProductData>().ReverseMap();
             CreateMap<ProductDiscountEf, ProductDiscount>().ReverseMap();
             CreateMap<ProductEligibilityEf, ProductEligibility>().ReverseMap();
             CreateMap<ProductFeatureEf, ProductFeature>().ReverseMap();

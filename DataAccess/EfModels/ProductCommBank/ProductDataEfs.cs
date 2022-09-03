@@ -1,8 +1,9 @@
 ﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace DataAccess.EfModels.ProductCommBank
 {
-    public class ProductDataEf
+    public class ProductDataEfs
     {
         [JsonProperty("features")]
         public List<ProductFeatureEf> Features { get; set; }
@@ -10,15 +11,15 @@ namespace DataAccess.EfModels.ProductCommBank
         [JsonProperty("constraints")]
         public List<ProductConstraintEf> Constraints { get; set; }
 
-        [JsonProperty("eligibility")]
-        public List<ProductEligibilityEf> Eligibility { get; set; }
+        //[JsonProperty("eligibility")]
+        //public List<ProductEligibilityEf> Eligibility { get; set; }
 
-        [JsonProperty("fees")]
-        public List<ProductFeeEf> Fees { get; set; }
+        //[JsonProperty("fees")]
+        //public List<ProductFeeEf> Fees { get; set; }
 
-        [JsonProperty("lendingRates")]
-        public List<ProductLendingRateEf> LendingRates { get; set; }
-
+        //[JsonProperty("lendingRates")]
+        //public List<ProductLendingRateEf> LendingRates { get; set; }
+        [Key]
         [JsonProperty("productId")]
         public string ProductId { get; set; }
 
@@ -52,7 +53,7 @@ namespace DataAccess.EfModels.ProductCommBank
         [JsonProperty("isTailored")]
         public bool IsTailored { get; set; }
 
-        [JsonProperty("additionalInformation")]
-        public ProductAdditionalInformationEf AdditionalInformation { get; set; }
+        //[JsonProperty("additionalInformation")]
+        //public ProductAdditionalInformationEf AdditionalInformation { get; set; }
     }
 }

@@ -1,9 +1,13 @@
-﻿using Domain.Entities.ProductsCommBank;
+﻿using Domain.Entities.ProductCommBank;
+using Domain.Entities.ProductsCommBank;
 
 namespace DataAccess.Services
 {
     public interface IDataAccessLayer
     {
         Task<string> SaveProducts(List<Products> product);
+        Task<string> SaveProduct(ProductData productData);
+        //Task<string> SaveProductFeature(List<ProductFeature> productFeature);
+        //Task<string> SaveProductConstraint(List<ProductConstraint> productConstraint);
     }
 }

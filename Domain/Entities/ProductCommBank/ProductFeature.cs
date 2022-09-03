@@ -1,9 +1,13 @@
 ﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Entities.ProductCommBank
 {
     public class ProductFeature
     {
+        [Key]
+        public Guid FeatureId { get; set; }
         [JsonProperty("featureType")]
         public string FeatureType { get; set; }
 
