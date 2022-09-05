@@ -7,6 +7,7 @@ namespace DataAccess.EfModels.ProductCommBank
     public class ProductFeatureEf
     {
         public Guid FeatureId { get; set; } = Guid.NewGuid();
+        public string ProductDataEfProductId { get; set; }
         [JsonProperty("featureType")]
         public string FeatureType { get; set; }
 
@@ -18,11 +19,5 @@ namespace DataAccess.EfModels.ProductCommBank
 
         [JsonProperty("additionalInfoUri")]
         public string AdditionalInfoUri { get; set; }
-
-        //public string ProductIdForeginKey { get; set; }
-        //public ProductDataEf ProductDataEf { get; set; }
-
-        //public string ProductId { get; set; }
-
     }
 }

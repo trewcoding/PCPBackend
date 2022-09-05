@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
+using System.ComponentModel.DataAnnotations;
 
 namespace DataAccess.EfModels.ProductCommBank
 {
     public class ProductConstraintEf
     {
+        [Key]
         public Guid ConstraintId { get; set; } = Guid.NewGuid();
         [JsonProperty("constraintType")]
         public string ConstraintType { get; set; }
@@ -13,6 +15,7 @@ namespace DataAccess.EfModels.ProductCommBank
 
         [JsonProperty("additionalInfo")]
         public string AdditionalInfo { get; set; }
-        //public string ProductId { get; set; }
+        public string ProductDataEfProductId { get; set; }
+        //public ProductDataEf ProductDataEf { get; set; }
     }
 }

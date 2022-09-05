@@ -1,4 +1,5 @@
 ﻿using Domain.Entities.ProductCommBank;
+using Domain.Entities.ProductsCommBank;
 
 namespace ApiClients.CommBankApiClient.ProductApitClient
 {

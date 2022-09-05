@@ -7,7 +7,5 @@ namespace DataAccess.Services
     {
         Task<string> SaveProducts(List<Products> product);
         Task<string> SaveProduct(ProductData productData);
-        //Task<string> SaveProductFeature(List<ProductFeature> productFeature);
-        //Task<string> SaveProductConstraint(List<ProductConstraint> productConstraint);
     }
 }

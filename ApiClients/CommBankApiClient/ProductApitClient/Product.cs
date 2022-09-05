@@ -1,4 +1,5 @@
 ﻿using ApiClients.CommBankApiClient.ProductsApiClient;
+using DataAccess.Context;
 using Domain.Entities.ProductCommBank;
 using Domain.Entities.ProductsCommBank;
 using Microsoft.Extensions.Logging;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
+using Products = Domain.Entities.ProductsCommBank.Products;
 
 namespace ApiClients.CommBankApiClient.ProductApitClient
 {
@@ -16,11 +18,13 @@ namespace ApiClients.CommBankApiClient.ProductApitClient
         private const string Get_Service_Request_Product = "public/cds-au/v1/banking/products/";
         private readonly HttpClient _httpClient;
         private readonly ILogger<ProductsApiClient.Products> _logger;
+        private readonly ApplicationDbContext _dbContext;
 
-        public Product(HttpClient httpClient, ILogger<ProductsApiClient.Products> logger)
+        public Product(HttpClient httpClient, ILogger<ProductsApiClient.Products> logger, ApplicationDbContext dbContext)
         {
             _httpClient = httpClient;
             _logger = logger;
+            _dbContext = dbContext;
         }
 
         public async Task<ProductResponseApi> GetProduct(string productId)

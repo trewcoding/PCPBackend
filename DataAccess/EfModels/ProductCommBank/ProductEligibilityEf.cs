@@ -4,6 +4,9 @@ namespace DataAccess.EfModels.ProductCommBank
 {
     public class ProductEligibilityEf
     {
+        public Guid EligibilityId { get; set; } = Guid.NewGuid();
+        public string ProductDataEfProductId { get; set; }
+        //public Guid DiscountId { get; set; }
         [JsonProperty("eligibilityType")]
         public string EligibilityType { get; set; }
 

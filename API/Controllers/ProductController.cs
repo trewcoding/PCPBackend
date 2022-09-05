@@ -17,15 +17,13 @@ namespace API.Controllers
             _product = product;
             _dataAccessLayer = dataAccessLayer;
         }
+        
 
         [HttpGet("{productId}")]
         public async Task<IActionResult> GetProductCall(string productId)
         {
             var result = await _product.GetProduct(productId);
             await _dataAccessLayer.SaveProduct(result.Data);
-            //await _dataAccessLayer.SaveProductFeature(result.Data.Features);
-            //await _dataAccessLayer.SaveProductConstraint(result.Data.Constraints);
-
             return Ok(result);
         }
     }

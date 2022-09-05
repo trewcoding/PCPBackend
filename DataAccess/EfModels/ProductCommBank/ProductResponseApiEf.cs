@@ -5,6 +5,6 @@ namespace DataAccess.EfModels.ProductCommBank
     public class ProductResponseApiEf
     {
         [JsonProperty("data")]
-        public ProductDataEfs Data { get; set; }
+        public ProductDataEf Data { get; set; }
     }
 }

@@ -4,6 +4,8 @@ namespace DataAccess.EfModels.ProductCommBank
 {
     public class ProductAdditionalInformationEf
     {
+        public Guid AdditionalInformationId { get; set; } = Guid.NewGuid();
+        public string ProductDataEfProductId { get; set; }
         [JsonProperty("overviewUri")]
         public string OverviewUri { get; set; }
 

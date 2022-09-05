@@ -6,8 +6,6 @@ namespace Domain.Entities.ProductCommBank
 {
     public class ProductFeature
     {
-        [Key]
-        public Guid FeatureId { get; set; }
         [JsonProperty("featureType")]
         public string FeatureType { get; set; }
 
