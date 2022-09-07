@@ -22,22 +22,19 @@ namespace DataAccess.Services
         {
             foreach (var item in products)
             {
-                var product = await  _dbContext.ProductsDataSet.FirstOrDefaultAsync(x => x.ProductId.Equals(item.ProductId));
+                var product = await  _dbContext.ProductsDataSet.AsNoTracking().FirstOrDefaultAsync(x => x.ProductId.Equals(item.ProductId));
+                
                 if (product == null)
                 {
                     var mappedValue = _mapper.Map<ProductsEF>(item);
                     _dbContext.ProductsDataSet.Add(mappedValue);
 
                 }
-                //else
-                //{
-                //    product.Brand = item.Brand;
-                //}
             }
             await _dbContext.SaveChangesAsync();
             return String.Empty;
         }
-        
+
         public async Task<string> SaveProduct(ProductData productData)
         {
             var product = await _dbContext.ProductDataSet.FirstOrDefaultAsync(x => x.ProductId.Equals(productData.ProductId));

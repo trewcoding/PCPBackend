@@ -1,8 +1,8 @@
-﻿
-using DataAccess.EfModels.ProductsCommBank;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using DataAccess.Services;
-using ApiClients.CommBankApiClient.ProductsApiClient.IProductsApiClient;
+using ServiceLayer;
+using ApiClients.ProductsApiClient.IProductsApiClient;
+using static ApiClients.Extensions.Enums;
 
 namespace API.Controllers
 {
@@ -13,24 +13,37 @@ namespace API.Controllers
     {
         private readonly IProducts _products;
         private readonly IDataAccessLayer _dataAccessLayer;
-        private readonly ProductController _productController;
+        private readonly IProductDetailsGetter _productDetailsGetter;
 
-        public ProductsController(IProducts products, IDataAccessLayer dataAccessLayer, ProductController productController)
+        public ProductsController(IProducts products, IDataAccessLayer dataAccessLayer, IProductDetailsGetter productDetailsGetter)
         {
-
             _products = products;
             _dataAccessLayer = dataAccessLayer;
-            _productController = productController;
+            _productDetailsGetter = productDetailsGetter;
         }
 
         [HttpGet(Name = "GetProducts")]
         public async Task<IActionResult> GetProductsCall()
         {
-            var result = await _products.GetProducts();
-            await _dataAccessLayer.SaveProducts(result.Data.Products);
+            var banklist = Enum.GetValues(typeof(Banks));
+            foreach (var bank in banklist)
+            {
+                var result = await _products.GetProducts(bank.ToString());
+                await _productDetailsGetter.GetProductDetailsAsync(result.Data.Products, bank.ToString());
+                await _dataAccessLayer.SaveProducts(result.Data.Products);
+                
+            }
+            return Ok();
+        }
+
+        [HttpGet("{productId}")]
+        public async Task<IActionResult> GetProductCall(string productId, string bank)
+        {
+            var result = await _products.GetProduct(productId, bank);
+            await _dataAccessLayer.SaveProduct(result.Data);
             return Ok(result);
         }
-        
-        
+
+
     }
 }

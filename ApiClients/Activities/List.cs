@@ -21,7 +21,7 @@ namespace ApiClients.Activities
 
             public async Task<List<Products>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _dbContext.ProductsDataSetTwo.ToListAsync(cancellationToken);
+                return null;//await _dbContext.ProductsDataSet.ToListAsync(cancellationToken);
             }
         }
     }

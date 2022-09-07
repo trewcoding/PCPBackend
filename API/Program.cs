@@ -1,6 +1,7 @@
 using ApiClients.Extensions;
 using DataAccess.Extensions;
 using Microsoft.EntityFrameworkCore;
+using ServiceLayer.Extemsions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +14,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddApiClientsMapping();
 builder.Services.AddDataAccessModules(configuration);
+builder.Services.AddServiceLayerModules(configuration);
 
 var app = builder.Build();
 

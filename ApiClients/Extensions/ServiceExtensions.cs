@@ -1,15 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Net.Http;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using ApiClients.CommBankApiClient.ProductsApiClient.IProductsApiClient;
-using ApiClients.CommBankApiClient.ProductsApiClient;
-using ApiClients.CommBankApiClient.ProductApitClient;
+using ApiClients.ProductsApiClient.IProductsApiClient;
+using ApiClients.ProductsApiClient;
+using static ApiClients.Extensions.Enums;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ApiClients.Extensions
 {
@@ -18,15 +11,25 @@ namespace ApiClients.Extensions
         public static void AddApiClientsMapping(this IServiceCollection services) 
         {
 
-            services.AddHttpClient<IProducts, Products>(client =>
+            services.AddHttpClient<IProducts, Products>($"{Banks.commBank}", commBank =>
             {
-                client.BaseAddress = new Uri("https://api.commbank.com.au/");
-                client.DefaultRequestHeaders.Add("x-v", "3");
+                commBank.BaseAddress = new Uri("https://api.commbank.com.au/public/");
+                commBank.DefaultRequestHeaders.Add("x-v", "3");
             });
-            services.AddHttpClient<IProduct, Product>(client =>
+            services.AddHttpClient<IProducts, Products>($"{Banks.nab}", nab =>
             {
-                client.BaseAddress = new Uri("https://api.commbank.com.au/");
-                client.DefaultRequestHeaders.Add("x-v", "3");
+                nab.BaseAddress = new Uri("https://openbank.api.nab.com.au/");
+                nab.DefaultRequestHeaders.Add("x-v", "3");
+            });
+            services.AddHttpClient<IProducts, Products>($"{Banks.westpac}", westpac =>
+            {
+                westpac.BaseAddress = new Uri("https://digital-api.westpac.com.au/");
+                westpac.DefaultRequestHeaders.Add("x-v", "3");
+            });
+            services.AddHttpClient<IProducts, Products>($"{Banks.anz}", anz =>
+            {
+                anz.BaseAddress = new Uri("https://api.anz/");
+                anz.DefaultRequestHeaders.Add("x-v", "3");
             });
         }
     }

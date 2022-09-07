@@ -25,6 +25,8 @@ namespace Domain.ProductMappings
             CreateMap<ProductFeatureEf, ProductFeature>().ReverseMap();
             CreateMap<ProductFeeEf, ProductFee>().ReverseMap();
             CreateMap<ProductLendingRateEf, ProductLendingRate>().ReverseMap();
+
+            CreateMap<ProductData, ProductsEF>().ForMember(d => d.LastUpdated, o => o.MapFrom(s => s.LastUpdated)).ReverseMap();
         }
     }
 }

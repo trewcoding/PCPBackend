@@ -9,7 +9,6 @@ namespace DataAccess.Context
     {
         private const string schema = "dbo";
         public virtual DbSet<ProductsEF> ProductsDataSet { get; set; }
-        public virtual DbSet<Products> ProductsDataSetTwo { get; set; }
         public virtual DbSet<ProductDataEf> ProductDataSet { get; set; }
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {

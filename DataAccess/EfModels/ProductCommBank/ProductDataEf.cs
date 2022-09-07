@@ -45,10 +45,10 @@ namespace DataAccess.EfModels.ProductCommBank
         public string Brand { get; set; }
 
         [JsonProperty("brandName")]
-        public string BrandName { get; set; }
+        public string ?BrandName { get; set; }
 
         [JsonProperty("applicationUri")]
-        public string ApplicationUri { get; set; }
+        public string ?ApplicationUri { get; set; }
 
         [JsonProperty("isTailored")]
         public bool IsTailored { get; set; }
