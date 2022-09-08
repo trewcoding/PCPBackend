@@ -43,7 +43,7 @@ namespace API.Controllers
         [HttpGet("{productId}")]
         public async Task<IActionResult> GetProductCall(string productId, string bank)
         {
-            var query = new GetProductQuery();
+            var query = new GetProductQuery(productId, bank);
             var result = await _mediator.Send(query);
             return Ok(result);
         }
