@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DataAccess.DTOS.ProductCommBank;
 using DataAccess.EfModels.ProductCommBank;
 using DataAccess.EfModels.ProductsCommBank;
 using Domain.Entities.ProductCommBank;
@@ -11,7 +12,8 @@ namespace Domain.ProductMappings
         public ProductMappings()
         {
             CreateMap<ProductsEF, Products>().ReverseMap();
-            CreateMap<Products, Products>();
+            CreateMap<ProductDataEf, ProductDataDto>().ReverseMap();
+            CreateMap<List<ProductDataEf>, List<ProductDataDto>>().ReverseMap();
             CreateMap<ProductsResponseApiEF, ProductsResponseApi>().ReverseMap();
             CreateMap<DataEF, Data>().ReverseMap();
             CreateMap<AdditionalInformationEF, AdditionalInformation>().ReverseMap();
@@ -26,7 +28,7 @@ namespace Domain.ProductMappings
             CreateMap<ProductFeeEf, ProductFee>().ReverseMap();
             CreateMap<ProductLendingRateEf, ProductLendingRate>().ReverseMap();
 
-            CreateMap<ProductData, ProductsEF>().ForMember(d => d.LastUpdated, o => o.MapFrom(s => s.LastUpdated)).ReverseMap();
+            //CreateMap<ProductData, ProductsEF>().ForMember(d => d.LastUpdated, o => o.MapFrom(s => s.LastUpdated)).ReverseMap();
         }
     }
 }

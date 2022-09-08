@@ -2,15 +2,13 @@
 using ApiClients.ProductsApiClient.IProductsApiClient;
 using ApiClients.ProductsApiClient;
 using static ApiClients.Extensions.Enums;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace ApiClients.Extensions
 {
     public static class ServiceExtensions
     {
-        public static void AddApiClientsMapping(this IServiceCollection services) 
+        public static IServiceCollection AddApiClientsMapping(this IServiceCollection services) 
         {
-
             services.AddHttpClient<IProducts, Products>($"{Banks.commBank}", commBank =>
             {
                 commBank.BaseAddress = new Uri("https://api.commbank.com.au/public/");
@@ -31,6 +29,7 @@ namespace ApiClients.Extensions
                 anz.BaseAddress = new Uri("https://api.anz/");
                 anz.DefaultRequestHeaders.Add("x-v", "3");
             });
+            return services;
         }
     }
 }

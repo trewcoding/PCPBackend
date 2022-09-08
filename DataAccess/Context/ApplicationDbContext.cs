@@ -1,7 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using DataAccess.EfModels.ProductsCommBank;
 using DataAccess.EfModels.ProductCommBank;
-using Domain.Entities.ProductsCommBank;
+using DataAccess.DTOS.ProductCommBank;
+using Domain.Entities.ProductCommBank;
 
 namespace DataAccess.Context
 {
@@ -27,7 +28,6 @@ namespace DataAccess.Context
             modelBuilder.HasDefaultSchema(schema).Entity<ProductEligibilityEf>().ToTable("ProductEligibility").HasKey(p => p.EligibilityId);
             modelBuilder.HasDefaultSchema(schema).Entity<ProductFeeEf>().ToTable("ProductFee").HasKey(p => p.FeeId);
             modelBuilder.HasDefaultSchema(schema).Entity<ProductLendingRateEf>().ToTable("ProductLendingRates").HasKey(p => p.LendingRatesId);
-
             base.OnModelCreating(modelBuilder);
         }
     }

@@ -1,4 +1,5 @@
-﻿using Domain.Entities.ProductCommBank;
+﻿using DataAccess.DTOS.ProductCommBank;
+using Domain.Entities.ProductCommBank;
 using Domain.Entities.ProductsCommBank;
 
 namespace DataAccess.Services
@@ -7,5 +8,6 @@ namespace DataAccess.Services
     {
         Task<string> SaveProducts(List<Products> product);
         Task<string> SaveProduct(ProductData productData);
+        Task<ProductDataDto> GetProductDetails(string productId);
     }
 }

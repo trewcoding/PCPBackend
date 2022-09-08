@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using DataAccess.Context;
+using DataAccess.DTOS.ProductCommBank;
 using DataAccess.EfModels.ProductCommBank;
 using DataAccess.EfModels.ProductsCommBank;
 using Domain.Entities.ProductCommBank;
@@ -45,6 +46,12 @@ namespace DataAccess.Services
             }
             await _dbContext.SaveChangesAsync();
             return String.Empty;
+        }
+
+        public async Task<ProductDataDto> GetProductDetails(string productId)
+        {
+            var product = await _dbContext.ProductDataSet.FirstOrDefaultAsync(x => x.ProductId.Equals(productId));
+            return _mapper.Map<ProductDataDto>(product);  
         }
 
     }

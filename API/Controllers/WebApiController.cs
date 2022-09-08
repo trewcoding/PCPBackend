@@ -1,17 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Domain.Entities.ProductsCommBank;
-using ApiClients.Activities;
-using DataAccess.EfModels.ProductsCommBank;
+using DataAccess.DTOS.ProductCommBank;
+using DataAccess.Activities;
+using DataAccess.EfModels.ProductCommBank;
 
 namespace API.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class WebApiController : BaseApiController
     {
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Products>>> GetAllProducts()
-        {
-            return await Mediator.Send(new List.Query());
+        //[HttpGet]
+        //public async Task<ActionResult<List<ProductDataEf>>> GetAllProducts()
+        //{
+        //    return Ok(await Mediator.Send(new QueryListAllProducts()));
+        //}
 
+        [HttpGet("{productId}", Name = "GetProductField")]
+        public ActionResult<ProductDataEf> GetProduct(string productId)
+        {
+            return Ok(Mediator.Send(new QueryProductDetails { ProductId = productId }));
         }
+
     }
 }
