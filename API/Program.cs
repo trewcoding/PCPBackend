@@ -20,7 +20,7 @@ builder.Services.AddDataAccessModules(configuration);
 builder.Services.AddServiceLayerModules(configuration);
 builder.Services.AddApiModules();
 //services.AddMediatR(typeof(HandlerListAllProducts).GetTypeInfo().Assembly);
-builder.Services.AddMediatR(typeof(Program));
+builder.Services.AddMediatR(typeof(Program).Assembly);
 
 var app = builder.Build();
 
