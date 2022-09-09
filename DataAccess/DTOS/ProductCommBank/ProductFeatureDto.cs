@@ -6,18 +6,20 @@ namespace DataAccess.DTOS.ProductCommBank
     public class ProductFeatureDto
     {
         [Key]
-        public Guid FeatureId { get; set; } 
+        [JsonProperty("featurId")]
+        public Guid FeatureId { get; set; }
+        [JsonProperty("productDataEfProductId")]
         public string ProductDataEfProductId { get; set; }
-        //[JsonProperty("featureType")]
+        [JsonProperty("featureType")]
         public string FeatureType { get; set; }
 
-        //[JsonProperty("additionalValue")]
+        [JsonProperty("additionalValue")]
         public string AdditionalValue { get; set; }
 
-        //[JsonProperty("additionalInfo")]
+        [JsonProperty("additionalInfo")]
         public string AdditionalInfo { get; set; }
 
-        //[JsonProperty("additionalInfoUri")]
+        [JsonProperty("additionalInfoUri")]
         public string AdditionalInfoUri { get; set; }
     }
 }

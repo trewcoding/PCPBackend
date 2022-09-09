@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using ApiClients.DTOS.ProductsCommBank;
+using AutoMapper;
 using DataAccess.DTOS.ProductCommBank;
 using DataAccess.EfModels.ProductCommBank;
 using DataAccess.EfModels.ProductsCommBank;
@@ -13,6 +14,7 @@ namespace Domain.ProductMappings
         {
             CreateMap<ProductsEF, Products>().ReverseMap();
             CreateMap<ProductDataEf, ProductDataDto>().ReverseMap();
+            CreateMap<ProductsEF, ProductsDto>().ReverseMap();
             //CreateMap<List<ProductDataEf>, List<ProductDataDto>>().ReverseMap();
             CreateMap<ProductsResponseApiEF, ProductsResponseApi>().ReverseMap();
             CreateMap<DataEF, Data>().ReverseMap();

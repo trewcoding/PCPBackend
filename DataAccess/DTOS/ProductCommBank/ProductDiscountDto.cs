@@ -6,18 +6,20 @@ namespace DataAccess.DTOS.ProductCommBank
     public class ProductDiscountDto
     {
         [Key]
+        [JsonProperty("discountId")]
         public Guid DiscountId { get; set; }
+        [JsonProperty("productFeeEfProductId")]
         public string ProductFeeEfProductId { get; set; }
-        //[JsonProperty("description")]
+        [JsonProperty("description")]
         public string Description { get; set; }
 
-        //[JsonProperty("discountType")]
+        [JsonProperty("discountType")]
         public string DiscountType { get; set; }
 
-        //[JsonProperty("amount")]
+        [JsonProperty("amount")]
         public string Amount { get; set; }
 
-        //[JsonProperty("eligibility")]
+        [JsonProperty("eligibility")]
         public List<ProductEligibilityDto> Eligibility { get; set; }
     }
 }

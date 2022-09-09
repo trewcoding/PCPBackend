@@ -10,6 +10,6 @@ namespace ApiClients.DTOS.ProductsCommBank
     public class DataDto
     {
         [JsonProperty("products")]
-        public List<ProductDto> Products { get; set; }
+        public List<ProductsDto> Products { get; set; }
     }
 }

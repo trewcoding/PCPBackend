@@ -6,18 +6,20 @@ namespace DataAccess.DTOS.ProductCommBank
     public class ProductLendingRateDto
     {
         [Key]
+        [JsonProperty("lendingRatesId")]
         public Guid LendingRatesId { get; set; }
+        [JsonProperty("productDataEfProductId")]
         public string ProductDataEfProductId { get; set; }
-        //[JsonProperty("lendingRateType")]
+        [JsonProperty("lendingRateType")]
         public string LendingRateType { get; set; }
 
-        //[JsonProperty("rate")]
+        [JsonProperty("rate")]
         public string Rate { get; set; }
 
-        //[JsonProperty("calculationFrequency")]
+        [JsonProperty("calculationFrequency")]
         public string CalculationFrequency { get; set; }
 
-        //[JsonProperty("additionalInfo")]
+        [JsonProperty("additionalInfo")]
         public string AdditionalInfo { get; set; }
     }
 }

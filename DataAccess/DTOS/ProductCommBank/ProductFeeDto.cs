@@ -6,30 +6,32 @@ namespace DataAccess.DTOS.ProductCommBank
     public class ProductFeeDto
     {
         [Key]
+        [JsonProperty("feeId")]
         public Guid FeeId { get; set; }
+        [JsonProperty("productDataEfProductId")]
         public string ProductDataEfProductId { get; set; }
-        //[JsonProperty("name")]
+        [JsonProperty("name")]
         public string Name { get; set; }
 
-        //[JsonProperty("feeType")]
+        [JsonProperty("feeType")]
         public string FeeType { get; set; }
 
-        //[JsonProperty("amount")]
+        [JsonProperty("amount")]
         public string Amount { get; set; }
 
-        //[JsonProperty("currency")]
+        [JsonProperty("currency")]
         public string Currency { get; set; }
 
-        //[JsonProperty("additionalInfo")]
+        [JsonProperty("additionalInfo")]
         public string AdditionalInfo { get; set; }
 
-        //[JsonProperty("additionalValue")]
+        [JsonProperty("additionalValue")]
         public string AdditionalValue { get; set; }
 
-        //[JsonProperty("discounts")]
+        [JsonProperty("discounts")]
         public List<ProductDiscountDto> Discounts { get; set; }
 
-        //[JsonProperty("transactionRate")]
+        [JsonProperty("transactionRate")]
         public string TransactionRate { get; set; }
     }
 }

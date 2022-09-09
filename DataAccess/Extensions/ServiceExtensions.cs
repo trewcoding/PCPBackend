@@ -26,6 +26,7 @@ namespace DataAccess.Extensions
             services.AddScoped<IDataAccessLayer, DataAccessLayer>();
             
             services.AddAutoMapper(typeof(ProductMappings).Assembly);
+            
 
         }
     }

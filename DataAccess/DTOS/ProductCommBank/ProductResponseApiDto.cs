@@ -4,7 +4,7 @@ namespace DataAccess.DTOS.ProductCommBank
 {
     public class ProductResponseApiDto
     {
-        //[JsonProperty("data")]
+        [JsonProperty("data")]
         public ProductDataDto Data { get; set; }
     }
 

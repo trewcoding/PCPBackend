@@ -9,14 +9,14 @@ namespace API.Controllers
     [Route("api/[controller]")]
     public class WebApiController : BaseApiController
     {
-        //[HttpGet]
-        //public async Task<ActionResult<List<ProductDataEf>>> GetAllProducts()
-        //{
-        //    return Ok(await Mediator.Send(new QueryListAllProducts()));
-        //}
+        [HttpGet]
+        public async Task<ActionResult<List<ProductDataEf>>> GetAllProducts()
+        {
+            return Ok(await Mediator.Send(new QueryListAllProducts()));
+        }
 
         [HttpGet("{productId}", Name = "GetProductField")]
-        public ActionResult<ProductDataEf> GetProduct(string productId)
+        public ActionResult<ProductDataDto> GetProduct(string productId)
         {
             return Ok(Mediator.Send(new QueryProductDetails { ProductId = productId }));
         }
