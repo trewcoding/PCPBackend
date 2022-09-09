@@ -13,7 +13,7 @@ namespace Domain.ProductMappings
         {
             CreateMap<ProductsEF, Products>().ReverseMap();
             CreateMap<ProductDataEf, ProductDataDto>().ReverseMap();
-            CreateMap<List<ProductDataEf>, List<ProductDataDto>>().ReverseMap();
+            //CreateMap<List<ProductDataEf>, List<ProductDataDto>>().ReverseMap();
             CreateMap<ProductsResponseApiEF, ProductsResponseApi>().ReverseMap();
             CreateMap<DataEF, Data>().ReverseMap();
             CreateMap<AdditionalInformationEF, AdditionalInformation>().ReverseMap();

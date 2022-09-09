@@ -6,6 +6,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace DataAccess.Extensions
 {
@@ -23,8 +24,9 @@ namespace DataAccess.Extensions
             },ServiceLifetime.Transient);
 
             services.AddScoped<IDataAccessLayer, DataAccessLayer>();
-            services.AddAutoMapper(typeof(ProductMappings).Assembly);
             
+            services.AddAutoMapper(typeof(ProductMappings).Assembly);
+
         }
     }
 }

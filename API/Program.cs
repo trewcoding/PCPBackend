@@ -1,5 +1,6 @@
 using API.ServiceExtensions;
 using ApiClients.Extensions;
+using DataAccess.Activities;
 using DataAccess.Extensions;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +11,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container
 var configuration = builder.Configuration;
 
-
+builder.Services.Scan(scan => scan
+                //.FromAssembliesOf(typeof(IMediator), typeof(HandlerProductDetails))
+                //.AddClasses()
+                //.AsImplementedInterfaces());
+                .FromAssemblyOf<Program>()
+                .AddClasses(classes => classes.AssignableTo(typeof(IRequestHandler<,>)))
+                    .AsImplementedInterfaces()
+                    .WithTransientLifetime());
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -21,6 +29,7 @@ builder.Services.AddServiceLayerModules(configuration);
 builder.Services.AddApiModules();
 //services.AddMediatR(typeof(HandlerListAllProducts).GetTypeInfo().Assembly);
 builder.Services.AddMediatR(typeof(Program));
+
 
 var app = builder.Build();
 
