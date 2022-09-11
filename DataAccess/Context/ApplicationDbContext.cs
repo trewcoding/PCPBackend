@@ -10,7 +10,7 @@ namespace DataAccess.Context
     {
         private const string schema = "dbo";
         public virtual DbSet<ProductsEF> ProductsDataSet { get; set; }
-        public virtual DbSet<ProductDataEf> ProductDataSet { get; set; }
+        public virtual DbSet<ProductDataEf> ProductDataSet { get; set; }  
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
             
@@ -22,7 +22,10 @@ namespace DataAccess.Context
             modelBuilder.HasDefaultSchema(schema).Entity<ProductsEF>().ToTable("Products").HasKey(p => p.ProductId);
             modelBuilder.HasDefaultSchema(schema).Entity<ProductDataEf>().ToTable("Product").HasKey(p => p.ProductId);
             modelBuilder.HasDefaultSchema(schema).Entity<ProductFeatureEf>().ToTable("ProductFeatures").HasKey(p => p.FeatureId);
-            modelBuilder.HasDefaultSchema(schema).Entity<ProductConstraintEf>().ToTable("ProductConstraint").HasKey(p => p.ConstraintId);
+            modelBuilder.HasDefaultSchema(schema).Entity<ProductConstraintEf>().ToTable("ProductConstraint")//.HasKey(p => p.ConstraintId);
+                .HasOne(e => e.ProductDataEf)
+                .WithMany(d => d.Constraints)
+                .HasForeignKey(e => e.ProductDataEfProductId);
             modelBuilder.HasDefaultSchema(schema).Entity<ProductAdditionalInformationEf>().ToTable("ProductAdditionalInformation").HasKey(p => p.AdditionalInformationId);
             modelBuilder.HasDefaultSchema(schema).Entity<ProductDiscountEf>().ToTable("ProductDiscount").HasKey(p => p.DiscountId);
             modelBuilder.HasDefaultSchema(schema).Entity<ProductEligibilityEf>().ToTable("ProductEligibility").HasKey(p => p.EligibilityId);

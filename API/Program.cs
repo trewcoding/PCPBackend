@@ -23,10 +23,10 @@ var configuration = builder.Configuration;
 //                    .WithTransientLifetime());
 builder.Services.AddControllers()
     .AddNewtonsoftJson(options => {
-    options.SerializerSettings.ContractResolver =
-          new CamelCasePropertyNamesContractResolver();
-        //options.SerializerSettings.ReferenceLoopHandling =
-        //Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+        //options.SerializerSettings.ContractResolver =
+        //      new CamelCasePropertyNamesContractResolver();
+        options.SerializerSettings.ReferenceLoopHandling =
+        Newtonsoft.Json.ReferenceLoopHandling.Ignore;
     });
 
     //.AddNewtonsoftJson(options =>

@@ -16,9 +16,9 @@ namespace API.Controllers
         }
 
         [HttpGet("{productId}", Name = "GetProductField")]
-        public ActionResult<ProductDataDto> GetProduct(string productId)
+        public async Task<ActionResult<ProductDataDto>> GetProduct(string productId)
         {
-            return Ok(Mediator.Send(new QueryProductDetails { ProductId = productId }));
+            return Ok(await Mediator.Send(new QueryProductDetails { ProductId = productId }));
         }
 
     }

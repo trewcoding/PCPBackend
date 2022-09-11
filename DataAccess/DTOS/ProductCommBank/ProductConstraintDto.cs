@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DataAccess.DTOS.ProductCommBank
 {
@@ -8,8 +9,9 @@ namespace DataAccess.DTOS.ProductCommBank
         [Key]
         [JsonProperty("constraintId")]
         public Guid ConstraintId { get; set; }
+        [ForeignKey("productDataEfProductId")]
         [JsonProperty("productDataEfProductId")]
-        public string ProductDataEfProductId { get; set; }
+        public virtual string ProductDataEfProductId { get; set; }
         [JsonProperty("constraintType")]
         public string ConstraintType { get; set; }
 
@@ -18,5 +20,7 @@ namespace DataAccess.DTOS.ProductCommBank
 
         [JsonProperty("additionalInfo")]
         public string AdditionalInfo { get; set; }
+
+        public virtual ProductDataDto ProductDataDto { get; set; }
     }
 }

@@ -6,6 +6,7 @@ using DataAccess.EfModels.ProductsCommBank;
 using Domain.Entities.ProductCommBank;
 using Domain.Entities.ProductsCommBank;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace DataAccess.Services
 {
@@ -13,7 +14,7 @@ namespace DataAccess.Services
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
-
+        
         public DataAccessLayer(ApplicationDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
@@ -51,7 +52,7 @@ namespace DataAccess.Services
         public async Task<ProductDataDto> GetProductDetails(string productId)
         {
             var product = await _dbContext.ProductDataSet.FirstOrDefaultAsync(x => x.ProductId.Equals(productId));
-            return _mapper.Map<ProductDataDto>(product);  
+            return _mapper.Map<ProductDataDto>(product);
         }
 
     }

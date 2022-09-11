@@ -4,20 +4,25 @@ namespace DataAccess.DTOS.ProductCommBank
 {
     public class ProductDataDto
     {
-        //[JsonProperty("features")]
-        //public List<ProductFeatureDto> Features { get; set; }
+        [JsonProperty("features")]
+        
+        public List<ProductFeatureDto> Features { get; set; }
 
-        //[JsonProperty("constraints")]
-        //public List<ProductConstraintDto> Constraints { get; set; }
+        [JsonProperty("constraints")]
+        
+        public List<ProductConstraintDto> Constraints { get; set; }
 
-        //[JsonProperty("eligibility")]
-        //public List<ProductEligibilityDto> Eligibility { get; set; }
+        [JsonProperty("eligibility")]
+        
+        public List<ProductEligibilityDto> Eligibility { get; set; }
 
-        //[JsonProperty("fees")]
-        //public List<ProductFeeDto> Fees { get; set; }
+        [JsonProperty("fees")]
+        
+        public List<ProductFeeDto> Fees { get; set; }
 
-        //[JsonProperty("lendingRates")]
-        //public List<ProductLendingRateDto> LendingRates { get; set; }
+        [JsonProperty("lendingRates")]
+        
+        public List<ProductLendingRateDto> LendingRates { get; set; }
 
         [JsonProperty("productId")]
         public string ProductId { get; set; }
@@ -52,7 +57,8 @@ namespace DataAccess.DTOS.ProductCommBank
         [JsonProperty("isTailored")]
         public bool IsTailored { get; set; }
 
-        //[JsonProperty("additionalInformation")]
-        //public ProductAdditionalInformationDto AdditionalInformation { get; set; }
+        [JsonProperty("additionalInformation")]
+        
+        public ProductAdditionalInformationDto AdditionalInformation { get; set; }
     }
 }

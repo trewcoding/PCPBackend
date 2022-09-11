@@ -26,8 +26,8 @@ namespace DataAccess.Activities
             public async Task<ProductDataDto> Handle(QueryProductDetails request, CancellationToken cancellationToken)
             {
                 var items = await _dataAccessLayer.GetProductDetails(productId: request.ProductId);
-                var results = _mapper.Map<ProductDataDto>(items);
-                return results;
+                //var results = _mapper.Map<ProductDataDto>(items);
+                return items;
             }
         }
     }
