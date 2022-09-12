@@ -1,25 +1,27 @@
-﻿using DataAccess.EfModels.ProductCommBank;
-using Newtonsoft.Json;
-using System.ComponentModel.DataAnnotations;
+﻿using Newtonsoft.Json;
 
-namespace DataAccess.EfModels.ProductCommBank
+namespace ApiCients.DTOS.ProductCommBank
 {
-    public class ProductDataEf
+    public class ProductDataDto
     {
-        [JsonProperty("features")]
-        public List<ProductFeatureEf> Features { get; set; }
+        [JsonProperty("features")] 
+        public List<ProductFeatureDto> Features { get; set; }
 
         [JsonProperty("constraints")]
-        public List<ProductConstraintEf> Constraints { get; set; }
+        
+        public List<ProductConstraintDto> Constraints { get; set; }
 
         [JsonProperty("eligibility")]
-        public List<ProductEligibilityEf> Eligibility { get; set; }
+        
+        public List<ProductEligibilityDto> Eligibility { get; set; }
 
         [JsonProperty("fees")]
-        public List<ProductFeeEf> Fees { get; set; }
+        
+        public List<ProductFeeDto> Fees { get; set; }
 
         [JsonProperty("lendingRates")]
-        public List<ProductLendingRateEf> LendingRates { get; set; }
+        
+        public List<ProductLendingRateDto> LendingRates { get; set; }
 
         [JsonProperty("productId")]
         public string ProductId { get; set; }
@@ -46,15 +48,16 @@ namespace DataAccess.EfModels.ProductCommBank
         public string Brand { get; set; }
 
         [JsonProperty("brandName")]
-        public string ?BrandName { get; set; }
+        public string? BrandName { get; set; }
 
         [JsonProperty("applicationUri")]
-        public string ?ApplicationUri { get; set; }
+        public string? ApplicationUri { get; set; }
 
         [JsonProperty("isTailored")]
         public bool IsTailored { get; set; }
 
         [JsonProperty("additionalInformation")]
-        public ProductAdditionalInformationEf AdditionalInformation { get; set; }
+        
+        public ProductAdditionalInformationDto AdditionalInformation { get; set; }
     }
 }

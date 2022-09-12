@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using DataAccess.Services;
 using ServiceLayer;
-using ApiClients.ProductsApiClient.IProductsApiClient;
 using static ApiClients.Extensions.Enums;
+using ApiClients.ProductsApiClient;
+using DataAccess.Services;
+using API.Queries;
+using MediatR;
 
 namespace API.Controllers
 {
@@ -13,23 +15,25 @@ namespace API.Controllers
     {
         private readonly IProducts _products;
         private readonly IDataAccessLayer _dataAccessLayer;
-        private readonly IProductDetailsGetter _productDetailsGetter;
-
-        public ProductsController(IProducts products, IDataAccessLayer dataAccessLayer, IProductDetailsGetter productDetailsGetter)
+        private readonly IProductsServices _productDetailsGetter;
+        private readonly IMediator _mediator;
+        public ProductsController(IProducts products, IDataAccessLayer dataAccessLayer, IProductsServices productDetailsGetter, IMediator mediator)
         {
             _products = products;
             _dataAccessLayer = dataAccessLayer;
             _productDetailsGetter = productDetailsGetter;
+            _mediator = mediator;
         }
 
         [HttpGet(Name = "GetProducts")]
         public async Task<IActionResult> GetProductsCall()
         {
-            var banklist = Enum.GetValues(typeof(Banks));
-            foreach (var bank in banklist)
+            List<string> banks = Enum.GetValues<Banks>().Cast<string>().ToList();
+            foreach (var bank in banks)
             {
+                return Ok(await _mediator.Send(new QueryListAllProducts()));
                 var result = await _products.GetProducts(bank.ToString());
-                await _productDetailsGetter.GetProductDetailsAsync(result.Data.Products, bank.ToString());
+                //await _productDetailsGetter.GetProductDetailsAsync(result.Data.Products, bank.ToString());
                 await _dataAccessLayer.SaveProducts(result.Data.Products);
                 
             }
@@ -39,9 +43,7 @@ namespace API.Controllers
         [HttpGet("{productId}")]
         public async Task<IActionResult> GetProductCall(string productId, string bank)
         {
-            var result = await _products.GetProduct(productId, bank);
-            await _dataAccessLayer.SaveProduct(result.Data);
-            return Ok(result);
+            return Ok(await _mediator.Send(new QueryProductDetails(productId, bank)));
         }
 
 

@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using ApiClients.ProductsApiClient.IProductsApiClient;
 using ApiClients.ProductsApiClient;
 using static ApiClients.Extensions.Enums;
 
