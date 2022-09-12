@@ -1,12 +1,9 @@
-﻿using DataAccess.Activities;
-using DataAccess.Context;
+﻿using DataAccess.Context;
 using DataAccess.Services;
 using Domain.ProductMappings;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
 
 namespace DataAccess.Extensions
 {
@@ -21,12 +18,12 @@ namespace DataAccess.Extensions
                     SqlOptions => SqlOptions.EnableRetryOnFailure());
                 options.EnableSensitiveDataLogging();
                 options.EnableDetailedErrors();
-            },ServiceLifetime.Transient);
+            }, ServiceLifetime.Transient);
 
             services.AddScoped<IDataAccessLayer, DataAccessLayer>();
-            
+
             services.AddAutoMapper(typeof(ProductMappings).Assembly);
-            
+
 
         }
     }

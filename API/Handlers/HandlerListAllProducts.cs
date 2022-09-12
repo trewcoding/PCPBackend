@@ -1,14 +1,13 @@
-﻿using ApiClients.DTOS.ProductsCommBank;
+﻿using API.Queries;
+using ApiClients.DTOS.ProductsCommBank;
 using AutoMapper;
 using DataAccess.Context;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
-namespace DataAccess.Activities
+namespace API.Handlers
 {
-
-    public class QueryListAllProducts : IRequest<List<ProductsDto>> { }
-
     public class HandlerListAllProducts : IRequestHandler<QueryListAllProducts, List<ProductsDto>>
     {
         private readonly ApplicationDbContext _dbContext;
@@ -27,5 +26,4 @@ namespace DataAccess.Activities
             return resultDto;
         }
     }
-
 }

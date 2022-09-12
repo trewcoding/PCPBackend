@@ -1,7 +1,5 @@
-﻿using DataAccess.Activities;
-using DataAccess.Services;
+﻿using API.Handlers;
 using MediatR;
-using System.Reflection;
 
 namespace API.ServiceExtensions
 {
@@ -13,7 +11,7 @@ namespace API.ServiceExtensions
             //services.AddScoped<IMediator, Mediator>();
             //services.AddMediatR(Assembly.GetExecutingAssembly());
             services.AddMediatR(typeof(HandlerProductDetails).Assembly);
-            services.AddMediatR(typeof(QueryListAllProducts).Assembly);
+            //services.AddMediatR(typeof(QueryListAllProducts).Assembly);
         }
     }
 }
