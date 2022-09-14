@@ -1,9 +1,11 @@
+
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using DataAccess.Context;
 using ApiClients.DTOS.ProductsCommBank;
 using API.Queries;
+
 
 namespace API.Handlers
 {
@@ -25,5 +27,4 @@ namespace API.Handlers
             return resultDto;
         }
     }
-
 }

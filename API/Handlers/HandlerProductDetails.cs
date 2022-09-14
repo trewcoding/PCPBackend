@@ -1,3 +1,4 @@
+
 ﻿using API.DTOS.ProductCommBank;
 using API.Queries;
 using AutoMapper;
@@ -5,6 +6,7 @@ using DataAccess.Services;
 using MediatR;
 using ServiceLayer;
 using System.Reflection.Metadata.Ecma335;
+
 
 namespace API.Handlers
 {
@@ -17,6 +19,7 @@ namespace API.Handlers
         {
             _mapper = mapper;
             _serviceLayer = serviceLayer;
+
         }
 
         public async Task<ProductDataDto> Handle(QueryProductDetails request, CancellationToken cancellationToken)

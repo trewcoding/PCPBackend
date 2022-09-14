@@ -1,4 +1,6 @@
+
 ﻿using API.DTOS.ProductCommBank;
+ 
 using MediatR;
 
 namespace API.Queries
@@ -12,6 +14,5 @@ namespace API.Queries
             ProductId = productId;
             Bank = bank;
         }
-
     }
 }

@@ -15,6 +15,7 @@ namespace API.Controllers
     {
         private readonly IProducts _products;
         private readonly IDataAccessLayer _dataAccessLayer;
+
         private readonly IProductsServices _productDetailsGetter;
         private readonly IMediator _mediator;
         public ProductsController(IProducts products, IDataAccessLayer dataAccessLayer, IProductsServices productDetailsGetter, IMediator mediator)
@@ -25,7 +26,7 @@ namespace API.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet(Name = "GetProducts")]
+        [HttpGet("apiCall", Name = "GetProducts")]
         public async Task<IActionResult> GetProductsCall()
         {
             List<string> banks = Enum.GetValues<Banks>().Cast<string>().ToList();
@@ -40,10 +41,22 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpGet("{productId}")]
+        [HttpGet("apiCall/{productId}", Name = "Get one Product")]
         public async Task<IActionResult> GetProductCall(string productId, string bank)
         {
             return Ok(await _mediator.Send(new QueryProductDetails(productId, bank)));
+        }
+
+        [HttpGet(Name = "List of All Products")]
+        public async Task<ActionResult<List<ProductDataEf>>> GetAllProducts()
+        {
+            return Ok(await _mediator.Send(new QueryListAllProducts()));
+        }
+
+        [HttpGet("{productId}", Name = "GetProductField")]
+        public async Task<ActionResult<ProductDataEf>> GetProduct(string productId)
+        {
+            return Ok(await _mediator.Send(new QueryProductDetails { ProductId = productId }));
         }
 
 
