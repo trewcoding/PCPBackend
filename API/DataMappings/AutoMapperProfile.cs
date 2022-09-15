@@ -1,8 +1,8 @@
-﻿using API.DTOS.ProductCommBank;
-using API.DTOS.ProductsCommBank;
+﻿using API.DTOS.Product;
+using API.DTOS.Products;
 using AutoMapper;
-using ServiceLayer.DTOS.ProductCommBank;
-using ServiceLayer.DTOS.ProductsCommBank;
+using ServiceLayer.DTOS.Product;
+using ServiceLayer.DTOS.Products;
 
 namespace API.DataMappings
 {
@@ -18,18 +18,17 @@ namespace API.DataMappings
 
         public void AddAPItoServiceLayerMapping()
         {
-            CreateMap<ProductAdditionalInformationSL, ProductAdditionalInformationDto>().ReverseMap();
-            CreateMap<ProductDataSL, ProductDataDto>().ReverseMap();
-            CreateMap<ProductDiscountSL, ProductDiscountDto>().ReverseMap();
-            CreateMap<ProductEligibilitySL, ProductEligibilityDto>().ReverseMap();
-            CreateMap<ProductFeatureSL, ProductFeatureDto>().ReverseMap();
-            CreateMap<ProductFeeSL, ProductFeeDto>().ReverseMap();
-            CreateMap<ProductLendingRateSL, ProductLendingRateDto>();
-            CreateMap<ProductResponseApiSL, ProductResponseApiDto>().ReverseMap();
-            CreateMap<AdditionalInformationSL, AdditionalInformationDto>().ReverseMap();
-            CreateMap<DataSL, DataDto>().ReverseMap();
-            CreateMap<ProductsResponseApiSL, ProductsResponseApiDto>().ReverseMap();
-            CreateMap<ProductsSL, ProductsDto>().ReverseMap();
+            CreateMap<ProductAdditionalInformationSl, ProductAdditionalInformationApi>().ReverseMap();
+            CreateMap<ProductDataSl, ProductDataApi>().ReverseMap();
+            CreateMap<ProductDiscountSl, ProductDiscountApi>().ReverseMap();
+            CreateMap<ProductEligibilitySl, ProductEligibilityApi>().ReverseMap();
+            CreateMap<ProductFeatureSl, ProductFeatureApi>().ReverseMap();
+            CreateMap<ProductFeeSl, ProductFeeApi>().ReverseMap();
+            CreateMap<ProductLendingRateSl, ProductLendingRateApi>();
+            CreateMap<ProductResponseApiSl, ProductResponseApiApi>().ReverseMap();
+            CreateMap<DataSl, DataApi>().ReverseMap();
+            CreateMap<ProductsResponseApiSl, ProductsResponseApiApi>().ReverseMap();
+            CreateMap<ProductsSl, ProductsApi>().ReverseMap();
         }
     }
 }

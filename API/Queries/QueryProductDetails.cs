@@ -1,11 +1,9 @@
-
-﻿using API.DTOS.ProductCommBank;
- 
+using API.DTOS.Product;
 using MediatR;
 
 namespace API.Queries
 {
-    public class QueryProductDetails : IRequest<ProductDataDto>
+    public class QueryProductDetails : IRequest<ProductDataApi>
     {
         public string ProductId { get; }
         public string Bank { get; }

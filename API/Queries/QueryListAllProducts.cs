@@ -1,9 +1,9 @@
-﻿using ApiClients.DTOS.ProductsCommBank;
+﻿using API.DTOS.Products;
 using MediatR;
 
 namespace API.Queries
 {
-    public class QueryListAllProducts : IRequest<List<ProductsDto>>
+    public class QueryListAllProducts : IRequest<List<ProductsApi>>
     {
     }
 }

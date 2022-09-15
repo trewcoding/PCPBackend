@@ -1,25 +1,23 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Domain.Entities.ProductCommBank;
-using DataAccess.EfModels.ProductCommBank;
-using DataAccess.EfModels.ProductsCommBank;
+using DataAccess.EfModels.Products;
+using DataAccess.EfModels.Product;
 
 namespace DataAccess.Context
 {
     public class ApplicationDbContext : DbContext
     {
         private const string schema = "dbo";
-        public virtual DbSet<ProductsEF> ProductsDataSet { get; set; }
+        public virtual DbSet<ProductsEf> ProductsDataSet { get; set; }
         public virtual DbSet<ProductDataEf> ProductDataSet { get; set; }
         public ApplicationDbContext(DbContextOptions options) : base(options)
         {
 
         }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema(schema)
-                .Entity<ProductsEF>()
+                .Entity<ProductsEf>()
                 .ToTable("Products")
                 .HasKey(p => p.ProductId);
 
@@ -37,9 +35,6 @@ namespace DataAccess.Context
                 .Entity<ProductConstraintEf>()
                 .ToTable("ProductConstraint")
                 .HasKey(p => p.ConstraintId);
-                //.HasOne(e => e.ProductDataEf)
-                //.WithMany(d => d.Constraints)
-                //.HasForeignKey(e => e.ProductDataEfProductId);
 
             modelBuilder.HasDefaultSchema(schema)
                 .Entity<ProductAdditionalInformationEf>()

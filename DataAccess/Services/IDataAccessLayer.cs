@@ -1,5 +1,5 @@
-﻿using Domain.Entities.ProductCommBank;
-using Domain.Entities.ProductsCommBank;
+﻿using Domain.Entities.Product;
+using Domain.Entities.Products;
 
 namespace DataAccess.Services
 {

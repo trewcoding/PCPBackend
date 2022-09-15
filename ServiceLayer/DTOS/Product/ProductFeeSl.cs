@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json;
-using System.ComponentModel.DataAnnotations;
-
-namespace ServiceLayer.DTOS.Product
+﻿namespace ServiceLayer.DTOS.Product
 {
     public class ProductFeeSl
     {

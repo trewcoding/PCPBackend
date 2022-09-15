@@ -1,14 +1,12 @@
-﻿using Newtonsoft.Json;
-
-namespace ServiceLayer.DTOS.Product
+﻿namespace ServiceLayer.DTOS.Product
 {
     public class ProductDataSl
     {      
         public List<ProductFeatureSl> Features { get; set; }       
         public List<ProductConstraintSl> Constraints { get; set; }
         public List<ProductEligibilitySl> Eligibility { get; set; }
-        public List<ProductFeeDto> Fees { get; set; }
-        public List<ProductLendingRateDto> LendingRates { get; set; }
+        public List<ProductFeeSl> Fees { get; set; }
+        public List<ProductLendingRateSl> LendingRates { get; set; }
         public string ProductId { get; set; }
         public DateTime EffectiveFrom { get; set; }
         public DateTime EffectiveTo { get; set; }

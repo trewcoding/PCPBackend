@@ -1,6 +1,7 @@
 ﻿using API.DataMappings;
 using AutoMapper;
 using MediatR;
+using System.Reflection;
 
 namespace API.ServiceExtensions
 {

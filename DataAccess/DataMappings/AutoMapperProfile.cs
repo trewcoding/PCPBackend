@@ -1,13 +1,8 @@
 ﻿using AutoMapper;
-using DataAccess.EfModels.ProductCommBank;
-using DataAccess.EfModels.ProductsCommBank;
-using Domain.Entities.ProductCommBank;
-using Domain.Entities.ProductsCommBank;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DataAccess.EfModels.Product;
+using DataAccess.EfModels.Products;
+using Domain.Entities.Product;
+using Domain.Entities.Products;
 
 namespace DataAccess.DataMappings
 {
@@ -39,10 +34,9 @@ namespace DataAccess.DataMappings
         /// </summary>
         public void AddProductsMappings()
         {
-            CreateMap<AdditionalInformationEF, AdditionalInformation>().ReverseMap();
-            CreateMap<DataEF, Data>().ReverseMap();
-            CreateMap<ProductsEF, Products>().ReverseMap();
-            CreateMap<ProductsResponseApiEF, ProductsResponseApi>().ReverseMap();
+            CreateMap<DataEf, Data>().ReverseMap();
+            CreateMap<ProductsEf, Products>().ReverseMap();
+            CreateMap<ProductsResponseApiEf, ProductsResponseApi>().ReverseMap();
         }
     }
 }

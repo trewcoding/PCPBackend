@@ -3,7 +3,6 @@ using ApiClients.Extensions;
 using ServiceLayer.Extemsions;
 using DataAccess.Extensions;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container

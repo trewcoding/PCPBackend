@@ -1,6 +1,6 @@
 ﻿namespace ServiceLayer.DTOS.Product
 {
-    public class ProductLendingRateDto
+    public class ProductLendingRateSl
     {
         public Guid LendingRatesId { get; set; }
         public string ProductDataEfProductId { get; set; }

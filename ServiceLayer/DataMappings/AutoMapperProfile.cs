@@ -1,15 +1,10 @@
-﻿using ApiCients.DTOS.ProductCommBank;
-using ApiClients.DTOS.ProductsCommBank;
+﻿using ApiClients.DTOS.Product;
+using ApiClients.DTOS.Products;
 using AutoMapper;
-using Domain.Entities.ProductCommBank;
-using Domain.Entities.ProductsCommBank;
-using ServiceLayer.DTOS.ProductCommBank;
-using ServiceLayer.DTOS.ProductsCommBank;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Domain.Entities.Product;
+using Domain.Entities.Products;
+using ServiceLayer.DTOS.Product;
+using ServiceLayer.DTOS.Products;
 
 namespace ServiceLayer.DataMappings
 {
@@ -17,40 +12,39 @@ namespace ServiceLayer.DataMappings
     {
         public AutoMapperProfile()
         {
-            AddEntityToServiceLayerMapping();
+            AddDomainToServiceLayerMapping();
             AddApiClientToServiceLayerMapping();
         }
 
-        public void AddEntityToServiceLayerMapping()
+        public void AddDomainToServiceLayerMapping()
         {
-            CreateMap<ProductAdditionalInformationSL, ProductAdditionalInformation>().ReverseMap();
-            CreateMap<ProductDataSL, ProductData>().ReverseMap();
-            CreateMap<ProductDiscountSL, ProductDiscount>().ReverseMap();
-            CreateMap<ProductEligibilitySL, ProductEligibility>().ReverseMap();
-            CreateMap<ProductFeatureSL, ProductFeature>().ReverseMap();
-            CreateMap<ProductFeeSL, ProductFee>().ReverseMap();
-            CreateMap<ProductLendingRateSL, ProductLendingRate>().ReverseMap();
-            CreateMap<ProductResponseApiSL, ProductResponseApi>().ReverseMap();
-            CreateMap<AdditionalInformationSL, AdditionalInformation>().ReverseMap();
-            CreateMap<DataSL, Data>().ReverseMap();
-            CreateMap<ProductsSL, Products>().ReverseMap();
-            CreateMap<ProductsResponseApiSL, ProductsResponseApi>().ReverseMap();
+            CreateMap<ProductAdditionalInformationSl, ProductAdditionalInformation>().ReverseMap();
+            CreateMap<ProductDataSl, ProductData>().ReverseMap();
+            CreateMap<ProductDiscountSl, ProductDiscount>().ReverseMap();
+            CreateMap<ProductEligibilitySl, ProductEligibility>().ReverseMap();
+            CreateMap<ProductFeatureSl, ProductFeature>().ReverseMap();
+            CreateMap<ProductFeeSl, ProductFee>().ReverseMap();
+            CreateMap<ProductLendingRateSl, ProductLendingRate>().ReverseMap();
+            CreateMap<ProductResponseApiSl, ProductResponseApi>().ReverseMap();
+            CreateMap<ProductAdditionalInformationSl, ProductAdditionalInformation>().ReverseMap();
+            CreateMap<DataSl, Data>().ReverseMap();
+            CreateMap<ProductsSl, Products>().ReverseMap();
+            CreateMap<ProductsResponseApiSl, ProductsResponseApi>().ReverseMap();
         }
 
         public void AddApiClientToServiceLayerMapping()
         {
-            CreateMap<ProductAdditionalInformationSL, ProductAdditionalInformationDto>().ReverseMap();
-            CreateMap<ProductDataSL, ProductDataDto>().ReverseMap();
-            CreateMap<ProductDiscountSL, ProductDiscountDto>().ReverseMap();
-            CreateMap<ProductEligibilitySL, ProductEligibilityDto>().ReverseMap();
-            CreateMap<ProductFeatureSL, ProductFeatureDto>().ReverseMap();
-            CreateMap<ProductFeeSL, ProductFeeDto>().ReverseMap();
-            CreateMap<ProductLendingRateSL, ProductLendingRateDto>();
-            CreateMap<ProductResponseApiSL, ProductResponseApiDto>().ReverseMap();
-            CreateMap<AdditionalInformationSL, AdditionalInformationDto>().ReverseMap();
-            CreateMap<DataSL, DataDto>().ReverseMap();
-            CreateMap<ProductsResponseApiSL, ProductsResponseApiDto>().ReverseMap();
-            CreateMap<ProductsSL, ProductsDto>().ReverseMap();
+            CreateMap<ProductAdditionalInformationSl, ProductAdditionalInformationAc>().ReverseMap();
+            CreateMap<ProductDataSl, ProductDataAc>().ReverseMap();
+            CreateMap<ProductDiscountSl, ProductDiscountAc>().ReverseMap();
+            CreateMap<ProductEligibilitySl, ProductEligibilityAc>().ReverseMap();
+            CreateMap<ProductFeatureSl, ProductFeatureAc>().ReverseMap();
+            CreateMap<ProductFeeSl, ProductFeeAc>().ReverseMap();
+            CreateMap<ProductLendingRateSl, ProductLendingRateAc>();
+            CreateMap<ProductResponseApiSl, ProductResponseApiAc>().ReverseMap();
+            CreateMap<DataSl, DataAc>().ReverseMap();
+            CreateMap<ProductsResponseApiSl, ProductsResponseApiAc>().ReverseMap();
+            CreateMap<ProductsSl, ProductsAc>().ReverseMap();
         }
     }
 }

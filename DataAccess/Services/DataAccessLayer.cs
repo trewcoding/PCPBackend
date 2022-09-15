@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
-using Domain.Entities.ProductCommBank;
-using Domain.Entities.ProductsCommBank;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using DataAccess.Context;
-using DataAccess.EfModels.ProductsCommBank;
-using DataAccess.EfModels.ProductCommBank;
+using DataAccess.EfModels.Products;
+using DataAccess.EfModels.Product;
+using Domain.Entities.Product;
+using Domain.Entities.Products;
 
 namespace DataAccess.Services
 {
@@ -29,7 +29,7 @@ namespace DataAccess.Services
                 
                 if (product == null)
                 {
-                    var mappedValue = _mapper.Map<ProductsEF>(item);
+                    var mappedValue = _mapper.Map<ProductsEf>(item);
                     _dbContext.ProductsDataSet.Add(mappedValue);
 
                 }

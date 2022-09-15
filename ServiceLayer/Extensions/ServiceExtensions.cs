@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceLayer.DataMappings;
+using ServiceLayer.DetailsService;
 
 namespace ServiceLayer.Extemsions
 {
@@ -9,7 +10,7 @@ namespace ServiceLayer.Extemsions
     {
         public static IServiceCollection AddServiceLayerModules(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddScoped<IProductsServices, ProductsServices>();
+            services.AddScoped<IProductService, ProductServices>();
             services.AddAutoMapper(provider => new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<AutoMapperProfile>();
