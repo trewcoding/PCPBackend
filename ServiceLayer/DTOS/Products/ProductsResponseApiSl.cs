@@ -1,4 +1,6 @@
-﻿namespace ServiceLayer.DTOS.Products
+﻿using Newtonsoft.Json;
+
+namespace ServiceLayer.DTOS.Products
 {
     public class ProductsResponseApiSl
     {

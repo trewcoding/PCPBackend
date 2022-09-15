@@ -35,7 +35,7 @@ namespace DataAccess.DataMappings
         public void AddProductsMappings()
         {
             CreateMap<DataEf, Data>().ReverseMap();
-            CreateMap<ProductsEf, Products>().ReverseMap();
+            CreateMap<Products, ProductsEf>().ReverseMap();
             CreateMap<ProductsResponseApiEf, ProductsResponseApi>().ReverseMap();
         }
     }

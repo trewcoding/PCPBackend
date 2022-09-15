@@ -5,7 +5,7 @@ namespace DataAccess.Services
 {
     public interface IDataAccessLayer
     {
-        Task<string> SaveProducts(List<Products> product);
+        Task<String> SaveProducts(Data product);
         Task<string> SaveProduct(ProductData productData);
         Task<ProductData> GetProductDetails(string productId);
     }

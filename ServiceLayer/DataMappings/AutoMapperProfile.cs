@@ -8,9 +8,9 @@ using ServiceLayer.DTOS.Products;
 
 namespace ServiceLayer.DataMappings
 {
-    public class AutoMapperProfile : Profile
+    public class AutoMapperSl : Profile
     {
-        public AutoMapperProfile()
+        public AutoMapperSl()
         {
             AddDomainToServiceLayerMapping();
             AddApiClientToServiceLayerMapping();
@@ -40,8 +40,8 @@ namespace ServiceLayer.DataMappings
             CreateMap<ProductEligibilitySl, ProductEligibilityAc>().ReverseMap();
             CreateMap<ProductFeatureSl, ProductFeatureAc>().ReverseMap();
             CreateMap<ProductFeeSl, ProductFeeAc>().ReverseMap();
-            CreateMap<ProductLendingRateSl, ProductLendingRateAc>();
-            CreateMap<ProductResponseApiSl, ProductResponseApiAc>().ReverseMap();
+            CreateMap<ProductLendingRateSl, ProductLendingRateAc>().ReverseMap();
+            CreateMap<ProductResponseApiAc, ProductResponseApiSl>().ReverseMap();
             CreateMap<DataSl, DataAc>().ReverseMap();
             CreateMap<ProductsResponseApiSl, ProductsResponseApiAc>().ReverseMap();
             CreateMap<ProductsSl, ProductsAc>().ReverseMap();

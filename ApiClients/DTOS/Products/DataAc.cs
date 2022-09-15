@@ -5,6 +5,6 @@ namespace ApiClients.DTOS.Products
     public class DataAc
     {
         [JsonProperty("products")]
-        public List<ProductsResponseApiAc> Products { get; set; }
+        public List<ProductsAc> Products { get; set; }
     }
 }

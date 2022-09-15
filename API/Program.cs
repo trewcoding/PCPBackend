@@ -2,6 +2,7 @@ using API.ServiceExtensions;
 using ApiClients.Extensions;
 using ServiceLayer.Extemsions;
 using DataAccess.Extensions;
+using Domain.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,8 +22,9 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddApiClientsMapping();
 builder.Services.AddDataAccessModules(configuration);
 builder.Services.AddServiceLayerModules(configuration);
+builder.Services.AddAPIService();
+builder.Services.AddDomainModules();
 
-builder.Services.AddAPIService(); 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

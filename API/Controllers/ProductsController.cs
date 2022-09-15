@@ -28,12 +28,11 @@ namespace API.Controllers
         [HttpGet("apiCall", Name = "GetProducts")]
         public async Task<IActionResult> GetProductsCall()
         {
-            List<string> banks = Enum.GetValues<Banks>().Cast<string>().ToList();
+            var banks = Enum.GetValues(typeof(Banks));
             foreach (var bank in banks)
             {
                 var result = await _productService.GetProductsExternalCall(bank.ToString());
-                return Ok(result);
-                //await _productDetailsGetter.GetProductDetailsAsync(result.Data.Products, bank.ToString());
+                //await _productService.GetProductDetailsAsync(result.Data.Products, bank.ToString());
                 //await _dataAccessLayer.SaveProducts(result.Data.Products);`````   
                 //return Ok(await _mediator.Send(new QueryListAllProducts()));
             }

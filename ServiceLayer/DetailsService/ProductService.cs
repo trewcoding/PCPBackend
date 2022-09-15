@@ -3,6 +3,7 @@ using DataAccess.Services;
 using ApiClients.ProductsApiClient;
 using ServiceLayer.DTOS.Products;
 using ServiceLayer.DTOS.Product;
+using Domain.Entities.Products;
 
 namespace ServiceLayer.DetailsService
 {
@@ -18,6 +19,12 @@ namespace ServiceLayer.DetailsService
             _productsExternalCall = productsExternalCall;
             _dataAccessLayer = dataAccessLayer;
         }
+        /// <summary>
+        /// Gets the information for each of the products from each of the banks and saves it to the db
+        /// </summary>
+        /// <param name="productId">The given id of a product</param>
+        /// <param name="bank">The bank the product corresponds to</param>
+        /// <returns>detailed product information</returns>
         public async Task<ProductResponseApiSl> GetProductAsync(string productId, string bank)
         {
             var result = await _productsExternalCall.GetProduct(productId, bank);
@@ -25,11 +32,19 @@ namespace ServiceLayer.DetailsService
             //await _dataAccessLayer.SaveProduct(mappedResult.Data);
             return mappedResult;
         }
+        /// <summary>
+        /// Get Products from the external api call and save the data to the db
+        /// </summary>
+        /// <param name="bank">Enum list of all the different banks</param>
+        /// <returns>Response from the api call</returns>
         public async Task<ProductsResponseApiSl> GetProductsExternalCall(string bank)
         {
             var result = await _productsExternalCall.GetProducts(bank);
-            var mappedResult = _mapper.Map<ProductsResponseApiSl>(result);
-            return mappedResult;
+            var mappedResultSl = _mapper.Map<ProductsResponseApiSl>(result);
+            var mappedResult = _mapper.Map<Data>(mappedResultSl.Data);
+            await _dataAccessLayer.SaveProducts(mappedResult);
+
+            return mappedResultSl;
         }
 
     }

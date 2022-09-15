@@ -21,17 +21,16 @@ namespace DataAccess.Services
             _mapper = mapper;
             _logger = logger;
         }
-        public async Task<string> SaveProducts(List<Products> products)
+        public async Task<string> SaveProducts(Data data)
         {
-            foreach (var item in products)
+            foreach (var item in data.Products)
             {
                 var product = await  _dbContext.ProductsDataSet.AsNoTracking().FirstOrDefaultAsync(x => x.ProductId.Equals(item.ProductId));
-                
                 if (product == null)
                 {
+
                     var mappedValue = _mapper.Map<ProductsEf>(item);
                     _dbContext.ProductsDataSet.Add(mappedValue);
-
                 }
             }
             await _dbContext.SaveChangesAsync();

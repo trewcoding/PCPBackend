@@ -11,11 +11,13 @@ namespace ApiClients.ProductsApiClient
     {
 
         private const string Get_Service_Request_Products = "cds-au/v1/banking/products";
+        private readonly HttpClient _httpClient;
         private readonly ILogger<ProductsExternalCall> _logger;
         private readonly IHttpClientFactory _clientFactory;
 
-        public ProductsExternalCall(ILogger<ProductsExternalCall> logger, IHttpClientFactory clientFactory)
-        { 
+        public ProductsExternalCall(HttpClient httpClient, ILogger<ProductsExternalCall> logger, IHttpClientFactory clientFactory)
+        {
+            _httpClient = httpClient;
             _logger = logger;
             _clientFactory = clientFactory;
         }
@@ -25,8 +27,8 @@ namespace ApiClients.ProductsApiClient
         {
                 
             string path = Get_Service_Request_Products;
-            var httpClient = _clientFactory.CreateClient(bank);
-            var response = await httpClient.GetAsync(path);
+            HttpClient httpClient = _clientFactory.CreateClient(bank);
+            HttpResponseMessage response = await httpClient.GetAsync(path);
             if (response.IsSuccessStatusCode)
             {
                 //await SaveChangesAsync();
