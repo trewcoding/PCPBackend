@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using DataAccess.EfModels.Product;
+using DataAccess.EfModels.Products;
 using Domain.Entities.Product;
 using Domain.Entities.Products;
 
@@ -16,18 +18,18 @@ namespace Domain.DataMappings
         /// </summary>
         public void AddDomainToDomainMappings()
         {
-            CreateMap<ProductAdditionalInformation, ProductAdditionalInformation>().ReverseMap();
-            CreateMap<ProductData, ProductData>().ReverseMap();
-            CreateMap<ProductConstraint, ProductConstraint>().ReverseMap();
-            CreateMap<ProductDiscount, ProductDiscount>().ReverseMap();
-            CreateMap<ProductEligibility, ProductEligibility>().ReverseMap();
-            CreateMap<ProductFeature, ProductFeature>().ReverseMap();
-            CreateMap<ProductFee, ProductFee>().ReverseMap();
-            CreateMap<ProductLendingRate, ProductLendingRate>().ReverseMap();
-            CreateMap<ProductResponseApi, ProductResponseApi>().ReverseMap();
-            CreateMap<Data, Data>().ReverseMap();
-            CreateMap<Products, Products>().ReverseMap();
-            CreateMap<ProductsResponseApi, ProductsResponseApi>().ReverseMap();
+            CreateMap<ProductAdditionalInformationEf, ProductAdditionalInformation>().ReverseMap();
+            CreateMap<ProductDataEf, ProductData>().ReverseMap();
+            CreateMap<ProductConstraintEf, ProductConstraint>().ReverseMap();
+            CreateMap<ProductDiscountEf, ProductDiscount>().ReverseMap();
+            CreateMap<ProductEligibilityEf, ProductEligibility>().ReverseMap();
+            CreateMap<ProductFeatureEf, ProductFeature>().ReverseMap();
+            CreateMap<ProductFeeEf, ProductFee>().ReverseMap();
+            CreateMap<ProductLendingRateEf, ProductLendingRate>().ReverseMap();
+            CreateMap<ProductResponseApiEf, ProductResponseApi>().ReverseMap();
+            CreateMap<DataEf, Data>().ReverseMap();
+            CreateMap<ProductsEf, Products>().ReverseMap();
+            CreateMap<ProductsResponseApiEf, ProductsResponseApi>().ReverseMap();
         }
     }
 }

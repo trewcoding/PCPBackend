@@ -6,6 +6,7 @@ using API.Queries;
 using MediatR;
 using ServiceLayer.DetailsService;
 using DataAccess.EfModels.Product;
+using API.DTOS.Product;
 
 namespace API.Controllers
 {
@@ -31,12 +32,14 @@ namespace API.Controllers
             var banks = Enum.GetValues(typeof(Banks));
             foreach (var bank in banks)
             {
-                var result = await _productService.GetProductsExternalCall(bank.ToString());
-                //await _productService.GetProductDetailsAsync(result.Data.Products, bank.ToString());
-                //await _dataAccessLayer.SaveProducts(result.Data.Products);`````   
-                //return Ok(await _mediator.Send(new QueryListAllProducts()));
+                var result = await _productService.SaveProductsExternalCall(bank.ToString());
+                foreach (var product in result.Data.Products)
+                {
+                    await _productService.SaveProductAsync(product.ProductId, bank.ToString());
+                } 
+                
             }
-            return Ok();
+            return Ok(await _mediator.Send(new QueryListAllProducts()));
         }
 
         //[HttpGet("apiCall/{productId}", Name = "Get one Product")]
@@ -45,17 +48,17 @@ namespace API.Controllers
         //    return Ok(await _mediator.Send(new QueryProductDetails(productId, bank)));
         //}
 
-        //[HttpGet(Name = "List of All Products")]
-        //public async Task<ActionResult<List<ProductDataEf>>> GetAllProducts()
-        //{
-        //    return Ok(await _mediator.Send(new QueryListAllProducts()));
-        //}
+        [HttpGet(Name = "List of All Products")]
+        public async Task<ActionResult<List<ProductDataEf>>> GetAllProducts()
+        {
+            return Ok(await _mediator.Send(new QueryListAllProducts()));
+        }
 
-        //[HttpGet("{productId}", Name = "GetProductField")]
-        //public async Task<ActionResult<ProductDataEf>> GetProduct(string productId)
-        //{
-        //    return Ok(await _mediator.Send(new QueryProductDetails { ProductId = productId }));
-        //}
+        [HttpGet("{productId}", Name = "GetProductField")]
+        public async Task<ActionResult<ProductDataApi>> GetProduct(string productId)
+        {
+            return Ok(await _mediator.Send(new QueryProductDetails(productId)));
+        }
 
 
     }

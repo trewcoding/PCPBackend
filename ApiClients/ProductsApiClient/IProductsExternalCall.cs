@@ -5,7 +5,7 @@ namespace ApiClients.ProductsApiClient
 {
     public interface IProductsExternalCall
     {
-        Task<ProductsResponseApiAc> GetProducts(string bank);
-        Task<ProductResponseApiAc> GetProduct(string productId, string bank);
+        Task<ProductsResponseApiAc> GetProductsExternal(string bank);
+        Task<ProductResponseApiAc> GetProductExternal(string productId, string bank);
     }
 }

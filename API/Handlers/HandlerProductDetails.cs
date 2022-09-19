@@ -22,8 +22,8 @@ namespace API.Handlers
 
         public async Task<ProductDataApi> Handle(QueryProductDetails request, CancellationToken cancellationToken)
         {
-            var productServiceDetailResponse = await _serviceLayer.GetProductAsync(request.ProductId, request.Bank);
-            var result = _mapper.Map<ProductDataApi>(productServiceDetailResponse.Data);
+            var productServiceDetailResponse = await _serviceLayer.GetProductDetails(request.ProductId);
+            var result = _mapper.Map<ProductDataApi>(productServiceDetailResponse);
             return result;
         }
     }

@@ -15,10 +15,11 @@ namespace API.ServiceExtensions
                 
             }, Assembly.GetExecutingAssembly());
 
-            services.AddAutoMapper(provider => new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile<AutoMapperProfile>();
-            }).CreateMapper());
+            //services.AddAutoMapper(provider => new MapperConfiguration(cfg =>
+            //{
+            //    cfg.AddProfile<AutoMapperProfile>();
+            //}).CreateMapper());
+            services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
 
             return services;
         }

@@ -1,12 +1,13 @@
-﻿using Domain.Entities.Product;
-using Domain.Entities.Products;
+﻿using DataAccess.EfModels.Product;
+using DataAccess.EfModels.Products;
 
 namespace DataAccess.Services
 {
     public interface IDataAccessLayer
     {
-        Task<String> SaveProducts(Data product);
-        Task<string> SaveProduct(ProductData productData);
-        Task<ProductData> GetProductDetails(string productId);
+        Task<string> SaveProducts(DataEf product);
+        Task<string> SaveProduct(ProductDataEf productData);
+        Task<ProductDataEf> GetProductDetails(string productId);
+        Task<List<ProductsEf>> GetAllProducts();
     }
 }

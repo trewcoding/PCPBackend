@@ -23,7 +23,7 @@ namespace ApiClients.ProductsApiClient
         }
 
 
-        public async Task<ProductsResponseApiAc> GetProducts(string bank)
+        public async Task<ProductsResponseApiAc> GetProductsExternal(string bank)
         {
                 
             string path = Get_Service_Request_Products;
@@ -43,7 +43,7 @@ namespace ApiClients.ProductsApiClient
         /// <param name="bank"></param>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        public async Task<ProductResponseApiAc> GetProduct(string productId, string bank)
+        public async Task<ProductResponseApiAc> GetProductExternal(string productId, string bank)
         {
             var path = Get_Service_Request_Products + '/' + productId;
             HttpClient httpClient = _clientFactory.CreateClient(bank);

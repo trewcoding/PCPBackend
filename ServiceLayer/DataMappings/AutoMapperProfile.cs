@@ -20,6 +20,7 @@ namespace ServiceLayer.DataMappings
         {
             CreateMap<ProductAdditionalInformationSl, ProductAdditionalInformation>().ReverseMap();
             CreateMap<ProductDataSl, ProductData>().ReverseMap();
+            CreateMap<ProductConstraintSl, ProductConstraint>().ReverseMap();
             CreateMap<ProductDiscountSl, ProductDiscount>().ReverseMap();
             CreateMap<ProductEligibilitySl, ProductEligibility>().ReverseMap();
             CreateMap<ProductFeatureSl, ProductFeature>().ReverseMap();
@@ -35,6 +36,7 @@ namespace ServiceLayer.DataMappings
         public void AddApiClientToServiceLayerMapping()
         {
             CreateMap<ProductAdditionalInformationSl, ProductAdditionalInformationAc>().ReverseMap();
+            CreateMap<ProductConstraintSl, ProductConstraintAc>().ReverseMap();
             CreateMap<ProductDataSl, ProductDataAc>().ReverseMap();
             CreateMap<ProductDiscountSl, ProductDiscountAc>().ReverseMap();
             CreateMap<ProductEligibilitySl, ProductEligibilityAc>().ReverseMap();

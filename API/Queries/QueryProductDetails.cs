@@ -6,11 +6,9 @@ namespace API.Queries
     public class QueryProductDetails : IRequest<ProductDataApi>
     {
         public string ProductId { get; }
-        public string Bank { get; }
-        public QueryProductDetails(string productId, string bank)
+        public QueryProductDetails(string productId)
         {
             ProductId = productId;
-            Bank = bank;
         }
     }
 }

@@ -4,8 +4,6 @@ using Microsoft.Extensions.Logging;
 using DataAccess.Context;
 using DataAccess.EfModels.Products;
 using DataAccess.EfModels.Product;
-using Domain.Entities.Product;
-using Domain.Entities.Products;
 
 namespace DataAccess.Services
 {
@@ -21,11 +19,12 @@ namespace DataAccess.Services
             _mapper = mapper;
             _logger = logger;
         }
-        public async Task<string> SaveProducts(Data data)
+        public async Task<string> SaveProducts(DataEf products)
         {
-            foreach (var item in data.Products)
+            foreach (var item in products.Products)
             {
-                var product = await  _dbContext.ProductsDataSet.AsNoTracking().FirstOrDefaultAsync(x => x.ProductId.Equals(item.ProductId));
+                var product = await _dbContext.ProductsDataSet.AsNoTracking()
+                                                              .FirstOrDefaultAsync(x => x.ProductId.Equals(item.ProductId));
                 if (product == null)
                 {
 
@@ -37,7 +36,7 @@ namespace DataAccess.Services
             return String.Empty;
         }
 
-        public async Task<string> SaveProduct(ProductData productData)
+        public async Task<string> SaveProduct(ProductDataEf productData)
         {
             var product = await _dbContext.ProductDataSet.FirstOrDefaultAsync(x => x.ProductId.Equals(productData.ProductId));
             if (product == null)
@@ -46,7 +45,7 @@ namespace DataAccess.Services
                 _dbContext.ProductDataSet.Add(mappedValue);
                 _logger.LogInformation("Added to Database");
             }
-            else if(productData.LastUpdated != product.LastUpdated)
+            else if (productData.LastUpdated != product.LastUpdated)
             {
                 var mappedValue = _mapper.Map<ProductDataEf>(productData);
                 _logger.LogInformation("Updated Database");
@@ -55,11 +54,24 @@ namespace DataAccess.Services
             return String.Empty;
         }
 
-        public async Task<ProductData> GetProductDetails(string productId)
+        public async Task<ProductDataEf> GetProductDetails(string productId)
         {
-            var product = await _dbContext.ProductDataSet.FirstOrDefaultAsync(x => x.ProductId.Equals(productId));
-            return _mapper.Map<ProductData>(product);
+            return await _dbContext.ProductDataSet
+                .Include(p => p.Features)
+                .Include(p => p.Constraints)
+                .Include(p => p.Eligibility)
+                .Include(p => p.LendingRates)
+                .Include(p => p.AdditionalInformation)
+                .Include(p => p.Fees)
+                .ThenInclude(y => y.Discounts)
+                .ThenInclude(x => x.Eligibility)
+                .FirstOrDefaultAsync(x => x.ProductId.Equals(productId));
         }
 
+        public async Task<List<ProductsEf>> GetAllProducts()
+        {
+            return await _dbContext.ProductsDataSet.ToListAsync();
+            
+        }
     }
 }

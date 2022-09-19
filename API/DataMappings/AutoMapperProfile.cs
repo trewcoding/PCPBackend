@@ -21,6 +21,7 @@ namespace API.DataMappings
             CreateMap<ProductAdditionalInformationSl, ProductAdditionalInformationApi>().ReverseMap();
             CreateMap<ProductDataSl, ProductDataApi>().ReverseMap();
             CreateMap<ProductDiscountSl, ProductDiscountApi>().ReverseMap();
+            CreateMap<ProductConstraintSl, ProductConstraintApi>().ReverseMap();
             CreateMap<ProductEligibilitySl, ProductEligibilityApi>().ReverseMap();
             CreateMap<ProductFeatureSl, ProductFeatureApi>().ReverseMap();
             CreateMap<ProductFeeSl, ProductFeeApi>().ReverseMap();
