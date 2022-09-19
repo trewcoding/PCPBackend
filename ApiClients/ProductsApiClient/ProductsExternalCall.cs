@@ -11,6 +11,7 @@ namespace ApiClients.ProductsApiClient
     {
 
         private const string Get_Service_Request_Products = "cds-au/v1/banking/products";
+        private const string Get_Request_Params = "?page-size=100";
         private readonly HttpClient _httpClient;
         private readonly ILogger<ProductsExternalCall> _logger;
         private readonly IHttpClientFactory _clientFactory;
@@ -26,7 +27,7 @@ namespace ApiClients.ProductsApiClient
         public async Task<ProductsResponseApiAc> GetProductsExternal(string bank)
         {
                 
-            string path = Get_Service_Request_Products;
+            string path = Get_Service_Request_Products + Get_Request_Params;
             HttpClient httpClient = _clientFactory.CreateClient(bank);
             HttpResponseMessage response = await httpClient.GetAsync(path);
             if (response.IsSuccessStatusCode)
@@ -45,7 +46,7 @@ namespace ApiClients.ProductsApiClient
         /// <exception cref="Exception"></exception>
         public async Task<ProductResponseApiAc> GetProductExternal(string productId, string bank)
         {
-            var path = Get_Service_Request_Products + '/' + productId;
+            var path = Get_Service_Request_Products + '/' + productId + Get_Request_Params;
             HttpClient httpClient = _clientFactory.CreateClient(bank);
             HttpResponseMessage response = await httpClient!.GetAsync(path);
             if (response.IsSuccessStatusCode)
