@@ -24,6 +24,13 @@ builder.Services.AddDataAccessModules(configuration);
 builder.Services.AddServiceLayerModules(configuration);
 builder.Services.AddAPIService();
 builder.Services.AddDomainModules();
+builder.Services.AddCors(opt =>
+{
+    opt.AddPolicy("CorsPolicy", policy =>
+    {
+        policy.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000");
+    });
+});
 
 var app = builder.Build();
 
@@ -35,6 +42,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("CorsPolicy");
 
 app.UseAuthorization();
 

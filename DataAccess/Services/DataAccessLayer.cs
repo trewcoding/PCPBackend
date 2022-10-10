@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using DataAccess.Context;
 using DataAccess.EfModels.Products;
 using DataAccess.EfModels.Product;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Services
 {
@@ -24,13 +24,21 @@ namespace DataAccess.Services
             foreach (var item in products.Products)
             {
                 var product = await _dbContext.ProductsDataSet.AsNoTracking()
-                                                              .FirstOrDefaultAsync(x => x.ProductId.Equals(item.ProductId));
+                    .FirstOrDefaultAsync(x => x.ProductId.Equals(item.ProductId));
                 if (product == null)
                 {
-
                     var mappedValue = _mapper.Map<ProductsEf>(item);
                     _dbContext.ProductsDataSet.Add(mappedValue);
                 }
+                else
+                {
+                    if (product.LastUpdated != item.LastUpdated)
+                    {
+                        var mappedValue = _mapper.Map<ProductsEf>(item);
+                        _dbContext.ProductsDataSet.Update(mappedValue);
+                    }
+                }
+                
             }
             await _dbContext.SaveChangesAsync();
             return String.Empty;
@@ -38,7 +46,7 @@ namespace DataAccess.Services
 
         public async Task<string> SaveProduct(ProductDataEf productData)
         {
-            var product = await _dbContext.ProductDataSet.FirstOrDefaultAsync(x => x.ProductId.Equals(productData.ProductId));
+            var product = await _dbContext.ProductDataSet.AsNoTracking().FirstOrDefaultAsync(x => x.ProductId.Equals(productData.ProductId));
             if (product == null)
             {
                 var mappedValue = _mapper.Map<ProductDataEf>(productData);
@@ -47,7 +55,41 @@ namespace DataAccess.Services
             }
             else if (productData.LastUpdated != product.LastUpdated)
             {
+                if (product.Fees != null)
+                {
+                    foreach (var fee in product.Fees)
+                    {
+                        foreach (var discount in fee.Discounts)
+                        {
+                            await _dbContext.Database.ExecuteSqlRawAsync(
+                                    $"DELETE FROM[dbo].[ProductEligibility] WHERE ProductFeeEfProductId='{discount.ProductFeeEfProductId}'"
+                                    );
+                            foreach (var eligibility in discount.Eligibility)
+                            {
+                                await _dbContext.Database.ExecuteSqlRawAsync(
+                                    $"DELETE FROM[dbo].[ProductEligibility] WHERE ProductDiscountEfDiscountId='{eligibility.ProductDiscountEfDiscountId}'"
+                                    );
+
+                            }
+                        }
+                    }
+                }
+                
+                var rowsDeleted = await _dbContext.Database.ExecuteSqlRawAsync(
+                    $"DELETE FROM[dbo].[ProductEligibility] WHERE ProductDataEfProductId='{product.ProductId}'" +
+                    $"DELETE FROM[dbo].[ProductAdditionalInformation] WHERE ProductDataEfProductId='{product.ProductId}'" +
+                    $"DELETE FROM[dbo].[ProductConstraint] WHERE ProductDataEfProductId='{product.ProductId}'" +
+                    $"DELETE FROM[dbo].[ProductFeatures] WHERE ProductDataEfProductId='{product.ProductId}'" +
+                    $"DELETE FROM[dbo].[ProductLendingRates] WHERE ProductDataEfProductId='{product.ProductId}'" +
+                    $"DELETE FROM[dbo].[ProductFee] WHERE ProductDataEfProductId='{product.ProductId}'" +
+                    $"DELETE FROM[dbo].[Product] WHERE ProductId='{product.ProductId}'"
+
+                    );
+                _logger.LogInformation("Rows Deleted"+(rowsDeleted).ToString());
+                //await _dbContext.SaveChangesAsync();
+                _logger.LogInformation("Deleted old record from Database");
                 var mappedValue = _mapper.Map<ProductDataEf>(productData);
+                _dbContext.ProductDataSet.Add(mappedValue);
                 _logger.LogInformation("Updated Database");
             }
             await _dbContext.SaveChangesAsync();

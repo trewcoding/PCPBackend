@@ -28,10 +28,10 @@ namespace ApiClients.DTOS.Product
         public string ProductId { get; set; }
 
         [JsonProperty("effectiveFrom")]
-        public DateTime EffectiveFrom { get; set; }
+        public DateTime? EffectiveFrom { get; set; }
 
         [JsonProperty("effectiveTo")]
-        public DateTime EffectiveTo { get; set; }
+        public DateTime? EffectiveTo { get; set; }
 
         [JsonProperty("lastUpdated")]
         public DateTime LastUpdated { get; set; }

@@ -4,30 +4,37 @@ using DataAccess.Services;
 using DataAccess.EfModels.Products;
 using DataAccess.EfModels.Product;
 using Domain.Entities.Product;
+using System.Globalization;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Domain.Services
 {
     public class ProductsPassThrough : IProductsPassThrough
     {
+
         private readonly IMapper _mapper;
         private readonly IDataAccessLayer _dataAccessLayer;
+        private readonly IStringProcessing _stringProcessing;
 
-        public ProductsPassThrough(IMapper mapper, IDataAccessLayer dataAccessLayer)
+        public ProductsPassThrough(IMapper mapper, IDataAccessLayer dataAccessLayer, IStringProcessing stringProcessing)
         {
             _mapper = mapper;
             _dataAccessLayer = dataAccessLayer;
+            _stringProcessing = stringProcessing;
         }
 
         public async Task<string> SaveProductsPassThrough(ProductsResponseApi products)
         {
-            var dataPassThrough = _mapper.Map<DataEf>(products.Data);
+            var dataStringParsing = await _stringProcessing.StringReplaceProducts(products);
+            var dataPassThrough = _mapper.Map<DataEf>(dataStringParsing.Data);
             await _dataAccessLayer.SaveProducts(dataPassThrough);
             return String.Empty;
         }
 
         public async Task<string> SaveProductPassThrough(ProductData product)
         {
-            var dataPassThrough = _mapper.Map<ProductDataEf>(product);
+            var dataStringParsing = await _stringProcessing.StringReplaceProduct(product);
+            var dataPassThrough = _mapper.Map<ProductDataEf>(dataStringParsing);
             await _dataAccessLayer.SaveProduct(dataPassThrough);
             return String.Empty;
         }

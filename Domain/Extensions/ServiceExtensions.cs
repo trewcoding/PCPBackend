@@ -10,6 +10,7 @@ namespace Domain.Extensions
         public static IServiceCollection AddDomainModules(this IServiceCollection services)
         {
             services.AddScoped<IProductsPassThrough, ProductsPassThrough>();
+            services.AddScoped<IStringProcessing, StringProcessing>();
             services.AddAutoMapper(provider => new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile<AutoMapperProfile>();

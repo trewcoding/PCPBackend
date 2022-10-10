@@ -8,8 +8,8 @@
         public List<ProductFeeEf>? Fees { get; set; }
         public List<ProductLendingRateEf>? LendingRates { get; set; }
         public string? ProductId { get; set; }
-        public DateTime EffectiveFrom { get; set; }
-        public DateTime EffectiveTo { get; set; }
+        public DateTime? EffectiveFrom { get; set; }
+        public DateTime? EffectiveTo { get; set; }
         public DateTime LastUpdated { get; set; }
         public string? ProductCategory { get; set; }
         public string? Name { get; set; }

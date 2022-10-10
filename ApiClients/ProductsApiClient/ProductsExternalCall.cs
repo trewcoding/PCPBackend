@@ -46,13 +46,13 @@ namespace ApiClients.ProductsApiClient
         /// <exception cref="Exception"></exception>
         public async Task<ProductResponseApiAc> GetProductExternal(string productId, string bank)
         {
-            var path = Get_Service_Request_Products + '/' + productId + Get_Request_Params;
+            var path = Get_Service_Request_Products + '/' + productId;//+ Get_Request_Params;
             HttpClient httpClient = _clientFactory.CreateClient(bank);
             HttpResponseMessage response = await httpClient!.GetAsync(path);
             if (response.IsSuccessStatusCode)
             {
                 return await response.Content.ReadFromJsonAsync<ProductResponseApiAc>();
-            }
+            }  
             throw new Exception();
         }
     }
