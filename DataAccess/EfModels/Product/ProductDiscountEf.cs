@@ -3,7 +3,6 @@
     public class ProductDiscountEf
     {
         public Guid DiscountId { get; set; } = Guid.NewGuid();
-        public string? ProductFeeEfProductId { get; set; }
         public Guid? ProductFeeEfFeeId { get; set; }
         public string? Description { get; set; }
         public string? DiscountType { get; set; }

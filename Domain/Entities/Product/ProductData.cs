@@ -18,6 +18,6 @@
         public string? BrandName { get; set; }
         public string? ApplicationUri { get; set; }
         public bool IsTailored { get; set; }
-        public ProductAdditionalInformation AdditionalInformation { get; set; }
+        public ProductAdditionalInformation? AdditionalInformation { get; set; }
     }
 }

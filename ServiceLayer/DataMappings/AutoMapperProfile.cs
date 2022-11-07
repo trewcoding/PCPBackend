@@ -36,13 +36,13 @@ namespace ServiceLayer.DataMappings
         public void AddApiClientToServiceLayerMapping()
         {
             CreateMap<ProductAdditionalInformationSl, ProductAdditionalInformationAc>().ReverseMap();
-            CreateMap<ProductConstraintSl, ProductConstraintAc>().ReverseMap();
+            CreateMap<ProductConstraintSl, ProductConstraintAc>().ReverseMap().ForMember(dest => dest.ConstraintType, opt => opt.NullSubstitute("Constraint type not provided"));
             CreateMap<ProductDataSl, ProductDataAc>().ReverseMap();
-            CreateMap<ProductDiscountSl, ProductDiscountAc>().ReverseMap();
+            CreateMap<ProductDiscountSl, ProductDiscountAc>().ReverseMap().ForMember(dest => dest.DiscountType, opt => opt.NullSubstitute("Discount type not provided")); ;
             CreateMap<ProductEligibilitySl, ProductEligibilityAc>().ReverseMap();
-            CreateMap<ProductFeatureSl, ProductFeatureAc>().ReverseMap();
-            CreateMap<ProductFeeSl, ProductFeeAc>().ReverseMap();
-            CreateMap<ProductLendingRateSl, ProductLendingRateAc>().ReverseMap();
+            CreateMap<ProductFeatureSl, ProductFeatureAc>().ReverseMap().ForMember(dest => dest.FeatureType, opt => opt.NullSubstitute("Feature type not provided")); ;
+            CreateMap<ProductFeeSl, ProductFeeAc>().ReverseMap().ForMember(dest => dest.FeeType, opt => opt.NullSubstitute("Fee type not provided")); ;
+            CreateMap<ProductLendingRateSl, ProductLendingRateAc>().ReverseMap().ForMember(dest => dest.LendingRateType, opt => opt.NullSubstitute("Lending rate type not provided")); ;
             CreateMap<ProductResponseApiAc, ProductResponseApiSl>().ReverseMap();
             CreateMap<DataSl, DataAc>().ReverseMap();
             CreateMap<ProductsResponseApiSl, ProductsResponseApiAc>().ReverseMap();

@@ -6,8 +6,8 @@ namespace ServiceLayer.DetailsService
 {
     public interface IProductService
     {
-        Task<ProductResponseApiSl> SaveProductAsync(string productId, string bank);
-        Task<ProductsResponseApiSl> SaveProductsExternalCall(string bank);
+        Task SaveProductAsync(string productId, string bank);
+        Task<List<string>> SaveProductsExternalCall(string bank);
         Task<ProductDataSl> GetProductDetails(string productId);
         Task<List<ProductsSl>> GetAllProducts();
     }

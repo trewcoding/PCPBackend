@@ -32,17 +32,17 @@ namespace ApiClients.ProductsApiClient
             HttpResponseMessage response = await httpClient.GetAsync(path);
             if (response.IsSuccessStatusCode)
             {
-                //await SaveChangesAsync();
                 return await response.Content.ReadFromJsonAsync<ProductsResponseApiAc>();
             }
             throw new Exception();
         }
+
         /// <summary>
-        /// 
+        /// Gets the product details from the open banking api for a given product
         /// </summary>
-        /// <param name="productId"></param>
-        /// <param name="bank"></param>
-        /// <returns></returns>
+        /// <param name="productId">Product Id for the product being retrieved</param>
+        /// <param name="bank">The bank associated with the product</param>
+        /// <returns>Product response after being deserilised from a json format</returns>
         /// <exception cref="Exception"></exception>
         public async Task<ProductResponseApiAc> GetProductExternal(string productId, string bank)
         {

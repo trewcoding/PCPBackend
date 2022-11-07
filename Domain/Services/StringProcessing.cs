@@ -1,10 +1,5 @@
 ﻿using Domain.Entities.Product;
 using Domain.Entities.Products;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Domain.Services
 {
@@ -12,125 +7,120 @@ namespace Domain.Services
     {
         public async Task<ProductData> StringReplaceProduct(ProductData productData)
         {
-            var adelaideBankReplace = new List<string>() { "AFG Home Loans Alpha", "Connective Home Loans Select",
+            await Task.Run(() =>
+            {
+                var adelaideBankReplace = new List<string>() { "AFG Home Loans Alpha", "Connective Home Loans Select",
                 "Aussie Elevate", "Tic:Toc", "Mezy Home Loans", "mortgageport", "Pepper Money", "MyBudget",
                 "Well Home Loans", "AMO", "Credabl", "Mortgage House", "emoney", "Finance Path", "Dreamstreet" };
-            foreach (var item in adelaideBankReplace)
-            {
-                if (productData.Brand == item)
+                for (int i = 0; i < adelaideBankReplace.Count; i++)
                 {
-                    productData.Brand = productData.Brand.Remove(0).Insert(0, "Adelaide Bank");
-                }
-            }
-            foreach (var items in productData.Features)
-            {
-                items.FeatureType = items.FeatureType.Replace("_", " ").ToLower();
-            }
-            foreach (var items in productData.Constraints)
-            {
-                items.ConstraintType = items.ConstraintType.Replace("_", " ").ToLower();
-            }
-            foreach (var items in productData.Eligibility)
-            {
-                items.EligibilityType = items.EligibilityType.Replace("_", " ").ToLower();
-            }
-            try
-            {
-                foreach (var items in productData.Fees)
-                {
-                    items.FeeType = items.FeeType.Replace("_", " ").ToLower();
-                    foreach (var item in items.Discounts)
+                    if (productData.Brand == adelaideBankReplace[i])
                     {
-                        item.DiscountType = item.DiscountType.Replace("_", " ").ToLower();
-                        foreach (var itemx in item.Eligibility)
+                        productData.Brand = productData.Brand.Replace(adelaideBankReplace[i], "Adelaide Bank");
+                    }
+                }
+                for (int i = 0; i < productData.Features?.Count; i++)
+                {
+                    productData.Features[i].FeatureType = productData.Features[i].FeatureType.Replace("_", " ").ToLower();
+                }
+                for (int i = 0; i < productData.Constraints?.Count; i++)
+                {
+                    productData.Constraints[i].ConstraintType = productData.Constraints[i].ConstraintType.Replace("_", " ").ToLower();
+                }
+                for (int i = 0; i < productData.Eligibility?.Count; i++)
+                {
+                    productData.Eligibility[i].EligibilityType = productData.Eligibility[i].EligibilityType.Replace("_", " ").ToLower();
+                }
+                for (int i = 0; i < productData.Fees?.Count; i++)
+                {
+                    productData.Fees[i].FeeType = productData.Fees[i].FeeType.Replace("_", " ").ToLower();
+                    for (int j = 0; j < productData.Fees[i].Discounts?.Count; j++)
+                    {
+                        productData.Fees[i].Discounts[j].DiscountType = productData.Fees[i].Discounts[j].DiscountType.Replace("_", " ").ToLower();
+                        for (int k = 0; k < productData.Fees[i].Discounts[j].Eligibility?.Count; k++)
                         {
-                            itemx.DiscountEligibilityType = itemx.DiscountEligibilityType.Replace("_", " ").ToLower();
+                            productData.Fees[i].Discounts[j].Eligibility[k].DiscountEligibilityType = productData.Fees[i].Discounts[j].Eligibility[k].DiscountEligibilityType.Replace("_", " ").ToLower();
                         }
                     }
                 }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-            
-            foreach (var items in productData.LendingRates)
-            {
-                items.LendingRateType = items.LendingRateType.Replace("_", " ").ToLower();
-            }
-            foreach (var items in productData.LendingRates)
-            {
-                items.LendingRateType = items.LendingRateType.Replace("_", " ").ToLower();
-            }
-            if (productData.Brand == "BT")
-            {
-                productData.Brand = productData.Brand.Replace("BT", "Westpac");
-            }
-            if (productData.Brand == "STL")
-            {
-                productData.Brand = productData.Brand.Replace("STL", "BENDIGO");
-            }
-            if (productData.Brand == "Macquarie Bank Limited")
-            {
-                productData.Brand = productData.Brand.Replace("Macquarie Bank Limited", "Macquarie Bank");
-            }
-            productData.ProductCategory.Replace("_", " ").ToLower();
-            if (productData.ProductCategory == "trans and savings accounts")
-            {
-                productData.ProductCategory = productData.ProductCategory.Replace("trans and savings accounts", "transaction and savings accounts");
-            }
-            if (productData.ProductCategory == "cred and chrg cards")
-            {
-                productData.ProductCategory = productData.ProductCategory.Replace("cred and chrg cards", "credit and charge cards");
-            }
-            if (productData.ProductCategory == "pers loans")
-            {
-                productData.ProductCategory = productData.ProductCategory.Replace("pers loans", "personal loans");
-            }
+                for (int i = 0; i < productData.LendingRates?.Count; i++)
+                {
+                    productData.LendingRates[i].LendingRateType = productData.LendingRates[i].LendingRateType.Replace("_", " ").ToLower();
+                }
+                if (productData.Brand == "BT")
+                {
+                    productData.Brand = productData.Brand.Replace("BT", "Westpac");
+                }
+                if (productData.Brand == "STL")
+                {
+                    productData.Brand = productData.Brand.Replace("STL", "BENDIGO");
+                }
+                if (productData.Brand == "Macquarie Bank Limited")
+                {
+                    productData.Brand = productData.Brand.Replace("Macquarie Bank Limited", "Macquarie Bank");
+                }
+                productData.ProductCategory = productData.ProductCategory?.Replace("_", " ").ToLower();
+                if (productData.ProductCategory == "trans and savings accounts")
+                {
+                    productData.ProductCategory = productData.ProductCategory.Replace("trans and savings accounts", "transaction and savings accounts");
+                }
+                if (productData.ProductCategory == "cred and chrg cards")
+                {
+                    productData.ProductCategory = productData.ProductCategory.Replace("cred and chrg cards", "credit and charge cards");
+                }
+                if (productData.ProductCategory == "pers loans")
+                {
+                    productData.ProductCategory = productData.ProductCategory.Replace("pers loans", "personal loans");
+                }
+                return productData;
+            });
             return productData;
+
         }
         public async Task<ProductsResponseApi> StringReplaceProducts(ProductsResponseApi productData)
         {
-            var adelaideBankReplace = new List<string>() { "AFG Home Loans Alpha", "Connective Home Loans Select", 
-                "Aussie Elevate", "Tic:Toc", "Mezy Home Loans", "mortgageport", "Pepper Money", "MyBudget", 
-                "Well Home Loans", "AMO", "Credabl", "Mortgage House", "emoney", "Finance Path", "Dreamstreet" };
-            var response = productData.Data.Products;
-            foreach (var items in response)
+            await Task.Run(() =>
             {
-                items.ProductCategory = items.ProductCategory.Replace("_", " ").ToLower();
-                if (items.ProductCategory == "trans and savings accounts")
+                var adelaideBankReplace = new List<string>() { "AFG Home Loans Alpha", "Connective Home Loans Select",
+                "Aussie Elevate", "Tic:Toc", "Mezy Home Loans", "mortgageport", "Pepper Money", "MyBudget",
+                "Well Home Loans", "AMO", "Credabl", "Mortgage House", "emoney", "Finance Path", "Dreamstreet" };
+                var response = productData.Data.Products;
+                for (int i = 0; i < response.Count; i++)
                 {
-                    items.ProductCategory = items.ProductCategory.Replace("trans and savings accounts", "transaction and savings accounts");
-                }
-                if (items.ProductCategory == "cred and chrg cards")
-                {
-                    items.ProductCategory = items.ProductCategory.Replace("cred and chrg cards", "credit and charge cards");
-                }
-                if (items.ProductCategory == "pers loans")
-                {
-                    items.ProductCategory = items.ProductCategory.Replace("pers loans", "personal loans");
-                }
-                if (items.Brand == "BT")
-                {
-                    items.Brand = items.Brand.Replace("BT", "Westpac");
-                }
-                if (items.Brand == "STL")
-                {
-                    items.Brand = items.Brand.Replace("STL", "BENDIGO");
-                }
-                foreach (var item in adelaideBankReplace)
-                {
-                    if (items.Brand == item)
+                    response[i].ProductCategory = response[i].ProductCategory.Replace("_", " ").ToLower();
+                    if (response[i].ProductCategory == "trans and savings accounts")
                     {
-                        items.Brand = items.Brand.Remove(0).Insert(0, "Adelaide Bank");
+                        response[i].ProductCategory = response[i].ProductCategory.Replace("trans and savings accounts", "transaction and savings accounts");
+                    }
+                    if (response[i].ProductCategory == "cred and chrg cards")
+                    {
+                        response[i].ProductCategory = response[i].ProductCategory.Replace("cred and chrg cards", "credit and charge cards");
+                    }
+                    if (response[i].ProductCategory == "pers loans")
+                    {
+                        response[i].ProductCategory = response[i].ProductCategory.Replace("pers loans", "personal loans");
+                    }
+                    if (response[i].Brand == "BT")
+                    {
+                        response[i].Brand = response[i].Brand.Replace("BT", "Westpac");
+                    }
+                    if (response[i].Brand == "STL")
+                    {
+                        response[i].Brand = response[i].Brand.Replace("STL", "BENDIGO");
+                    }
+                    for (int j = 0; j < adelaideBankReplace.Count; j++)
+                    {
+                        if (response[i].Brand == adelaideBankReplace[j])
+                        {
+                            response[i].Brand = response[i].Brand.Replace(adelaideBankReplace[j], "Adelaide Bank");
+                        }
+                    }
+                    if (response[i].Brand == "Macquarie Bank Limited")
+                    {
+                        response[i].Brand = response[i].Brand.Replace("Macquarie Bank Limited", "Macquarie Bank");
                     }
                 }
-                if (items.Brand == "Macquarie Bank Limited")
-                {
-                    items.Brand = items.Brand.Replace("Macquarie Bank Limited", "Macquarie Bank");
-                }
-            }
-
+            });
             return productData;
         }
     }

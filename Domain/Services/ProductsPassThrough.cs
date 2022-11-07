@@ -4,8 +4,6 @@ using DataAccess.Services;
 using DataAccess.EfModels.Products;
 using DataAccess.EfModels.Product;
 using Domain.Entities.Product;
-using System.Globalization;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Domain.Services
 {
@@ -23,20 +21,19 @@ namespace Domain.Services
             _stringProcessing = stringProcessing;
         }
 
-        public async Task<string> SaveProductsPassThrough(ProductsResponseApi products)
+        public async Task<List<string>> SaveProductsPassThrough(ProductsResponseApi products)
         {
             var dataStringParsing = await _stringProcessing.StringReplaceProducts(products);
             var dataPassThrough = _mapper.Map<DataEf>(dataStringParsing.Data);
-            await _dataAccessLayer.SaveProducts(dataPassThrough);
-            return String.Empty;
+            var newOrUpdatedProducts = await _dataAccessLayer.SaveProducts(dataPassThrough);
+            return newOrUpdatedProducts;
         }
 
-        public async Task<string> SaveProductPassThrough(ProductData product)
+        public async Task SaveProductPassThrough(ProductData product)
         {
             var dataStringParsing = await _stringProcessing.StringReplaceProduct(product);
             var dataPassThrough = _mapper.Map<ProductDataEf>(dataStringParsing);
             await _dataAccessLayer.SaveProduct(dataPassThrough);
-            return String.Empty;
         }
 
         public async Task<ProductData> GetProductDetailsPassThrough(string productId)

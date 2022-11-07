@@ -11,8 +11,8 @@ namespace Domain.Services
 {
     public interface IProductsPassThrough
     {
-        Task<string> SaveProductsPassThrough(ProductsResponseApi products);
-        Task<string> SaveProductPassThrough(ProductData product);
+        Task<List<string>> SaveProductsPassThrough(ProductsResponseApi products);
+        Task SaveProductPassThrough(ProductData product);
         Task<ProductData> GetProductDetailsPassThrough(string productId);
         Task<List<Products>> GetAllProductsPassThrough();
     }

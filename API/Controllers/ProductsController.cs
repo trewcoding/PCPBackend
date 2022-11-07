@@ -30,23 +30,22 @@ namespace API.Controllers
             foreach (var bank in banks)
             {
                 var result = await _productService.SaveProductsExternalCall(bank.ToString());
-                foreach (var product in result.Data.Products)
+                foreach (var product in result)
                 {
-                    await _productService.SaveProductAsync(product.ProductId, bank.ToString());
-                } 
-                
+                    await _productService.SaveProductAsync(product, bank.ToString());
+                }  
             }
             return Ok(await _mediator.Send(new QueryListAllProducts()));
         }
 
         [HttpGet(Name = "List of All Products")]
-        public async Task<ActionResult<List<ProductDataEf>>> GetAllProducts()
+        public async Task<IActionResult> GetAllProducts()
         {
             return Ok(await _mediator.Send(new QueryListAllProducts())); 
         }
 
         [HttpGet("{productId}", Name = "GetProductField")]
-        public async Task<ActionResult<ProductDataApi>> GetProduct(string productId)
+        public async Task<IActionResult> GetProduct(string productId)
         {
             Console.WriteLine("here"+productId);
             return Ok(await _mediator.Send(new QueryProductDetails(productId)));

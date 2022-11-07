@@ -11,8 +11,6 @@ var configuration = builder.Configuration;
 
 builder.Services.AddControllers()
     .AddNewtonsoftJson(options => {
-        //options.SerializerSettings.ContractResolver =
-        //      new CamelCasePropertyNamesContractResolver();
         options.SerializerSettings.ReferenceLoopHandling =
         Newtonsoft.Json.ReferenceLoopHandling.Ignore;
     });
@@ -33,6 +31,8 @@ builder.Services.AddCors(opt =>
 });
 
 var app = builder.Build();
+
+app.UseExceptionHandler("/error");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
