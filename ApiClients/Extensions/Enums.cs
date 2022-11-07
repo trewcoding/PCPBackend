@@ -10,10 +10,15 @@ namespace ApiClients.Extensions
     {
         public enum Banks
         {
+            boq,
             commBank,
             nab,
             anz,
             westpac,
+            bendigoBank,
+            macquarie,
+            adelaide,
+
         }
     }
 }

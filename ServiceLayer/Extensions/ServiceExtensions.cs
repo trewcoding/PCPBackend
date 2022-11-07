@@ -1,14 +1,22 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using AutoMapper;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ServiceLayer.DataMappings;
+using ServiceLayer.DetailsService;
 
 namespace ServiceLayer.Extemsions
 {
     public static class ServiceExtensions
     {
-        public static void AddServiceLayerModules(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddServiceLayerModules(this IServiceCollection services, IConfiguration configuration)
         {
-
-            services.AddScoped<IProductDetailsGetter, ProductDetailsGetter>();
+            services.AddScoped<IProductService, ProductServices>();
+            //services.AddAutoMapper(provider => new MapperConfiguration(cfg =>
+            //{
+            //    cfg.AddProfile<AutoMapperProfile>();
+            //}).CreateMapper());
+            services.AddAutoMapper(typeof(AutoMapperSl).Assembly);
+            return services;
         }
     }
 }

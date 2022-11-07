@@ -1,28 +1,30 @@
-﻿using API.Queries;
+
+using API.DTOS.Product;
+using API.Queries;
 using AutoMapper;
-using DataAccess.DTOS.ProductCommBank;
-using DataAccess.Services;
 using MediatR;
+using ServiceLayer.DetailsService;
+
 
 namespace API.Handlers
 {
-    public class HandlerProductDetails : IRequestHandler<QueryProductDetails, ProductDataDto>
+    public class HandlerProductDetails : IRequestHandler<QueryProductDetails, ProductDataApi>
     {
-        private readonly IDataAccessLayer _dataAccessLayer;
         private readonly IMapper _mapper;
+        private readonly IProductService _serviceLayer;
 
-        public HandlerProductDetails(IDataAccessLayer dataAccessLayer, IMapper mapper)
+        public HandlerProductDetails(IMapper mapper, IProductService serviceLayer)
         {
-
-            _dataAccessLayer = dataAccessLayer;
             _mapper = mapper;
+            _serviceLayer = serviceLayer;
+
         }
 
-        public async Task<ProductDataDto> Handle(QueryProductDetails request, CancellationToken cancellationToken)
+        public async Task<ProductDataApi> Handle(QueryProductDetails request, CancellationToken cancellationToken)
         {
-            var items = await _dataAccessLayer.GetProductDetails(productId: request.ProductId);
-            //var results = _mapper.Map<ProductDataDto>(items);
-            return items;
+            var productServiceDetailResponse = await _serviceLayer.GetProductDetails(request.ProductId);
+            var result = _mapper.Map<ProductDataApi>(productServiceDetailResponse);
+            return result;
         }
     }
 }

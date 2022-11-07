@@ -1,15 +1,17 @@
 ﻿using DataAccess.Context;
+using DataAccess.DataMappings;
 using DataAccess.Services;
-using Domain.ProductMappings;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using AutoMapper;
+
 
 namespace DataAccess.Extensions
 {
     public static class ServiceExtensions
     {
-        public static void AddDataAccessModules(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddDataAccessModules(this IServiceCollection services, IConfiguration configuration)
         {
 
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -22,9 +24,12 @@ namespace DataAccess.Extensions
 
             services.AddScoped<IDataAccessLayer, DataAccessLayer>();
 
-            services.AddAutoMapper(typeof(ProductMappings).Assembly);
-
-
+            services.AddAutoMapper(provider => new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile<AutoMapperProfile>();
+            }).CreateMapper());
+            
+            return services;
         }
     }
 }

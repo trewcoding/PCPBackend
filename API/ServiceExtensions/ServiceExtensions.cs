@@ -1,17 +1,27 @@
-﻿using API.Handlers;
+﻿using API.DataMappings;
+using AutoMapper;
 using MediatR;
+using System.Reflection;
 
 namespace API.ServiceExtensions
 {
     public static class ServiceExtensions
     {
-        public static void AddApiModules(this IServiceCollection services)
+        public static IServiceCollection AddAPIService(this IServiceCollection services)
         {
-            //services.AddScoped<IDataAccessLayer, DataAccessLayer>();
-            //services.AddScoped<IMediator, Mediator>();
-            //services.AddMediatR(Assembly.GetExecutingAssembly());
-            services.AddMediatR(typeof(HandlerProductDetails).Assembly);
-            //services.AddMediatR(typeof(QueryListAllProducts).Assembly);
+            services.AddMediatR(cfg =>
+            {
+                cfg.AsScoped();
+                
+            }, Assembly.GetExecutingAssembly());
+
+            //services.AddAutoMapper(provider => new MapperConfiguration(cfg =>
+            //{
+            //    cfg.AddProfile<AutoMapperProfile>();
+            //}).CreateMapper());
+            services.AddAutoMapper(typeof(AutoMapperProfile).Assembly);
+
+            return services;
         }
     }
 }

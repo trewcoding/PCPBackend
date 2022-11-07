@@ -1,28 +1,29 @@
-﻿using API.Queries;
-using ApiClients.DTOS.ProductsCommBank;
 using AutoMapper;
-using DataAccess.Context;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Mvc;
+using DataAccess.Context;
+using API.Queries;
+using API.DTOS.Products;
+using ServiceLayer.DetailsService;
 
 namespace API.Handlers
 {
-    public class HandlerListAllProducts : IRequestHandler<QueryListAllProducts, List<ProductsDto>>
+    public class HandlerListAllProducts : IRequestHandler<QueryListAllProducts, List<ProductsApi>>
     {
-        private readonly ApplicationDbContext _dbContext;
         private readonly IMapper _mapper;
+        private readonly IProductService _serviceLayer;
 
-        public HandlerListAllProducts(ApplicationDbContext dbContext, IMapper mapper)
+        public HandlerListAllProducts(IMapper mapper, IProductService serviceLayer)
         {
-            _dbContext = dbContext;
             _mapper = mapper;
+            _serviceLayer = serviceLayer;
+
         }
 
-        public async Task<List<ProductsDto>> Handle(QueryListAllProducts request, CancellationToken cancellationToken)
+        public async Task<List<ProductsApi>> Handle(QueryListAllProducts request, CancellationToken cancellationToken)
         {
-            var result = await _dbContext.ProductsDataSet.ToListAsync();
-            var resultDto = _mapper.Map<List<ProductsDto>>(result);
+            var result = await _serviceLayer.GetAllProducts();
+            var resultDto = _mapper.Map<List<ProductsApi>>(result);
             return resultDto;
         }
     }

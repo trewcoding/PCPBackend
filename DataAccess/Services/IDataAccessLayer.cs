@@ -1,13 +1,13 @@
-﻿using DataAccess.DTOS.ProductCommBank;
-using Domain.Entities.ProductCommBank;
-using Domain.Entities.ProductsCommBank;
+﻿using DataAccess.EfModels.Product;
+using DataAccess.EfModels.Products;
 
 namespace DataAccess.Services
 {
     public interface IDataAccessLayer
     {
-        Task<string> SaveProducts(List<Products> product);
-        Task<string> SaveProduct(ProductData productData);
-        Task<ProductDataDto> GetProductDetails(string productId);
+        Task<List<string>> SaveProducts(DataEf product);
+        Task SaveProduct(ProductDataEf productData);
+        Task<ProductDataEf> GetProductDetails(string productId);
+        Task<List<ProductsEf>> GetAllProducts();
     }
 }

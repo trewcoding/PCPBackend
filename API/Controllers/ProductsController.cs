@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using DataAccess.Services;
-using ServiceLayer;
-using ApiClients.ProductsApiClient.IProductsApiClient;
-using API.Queries;
-using DataAccess.EfModels.ProductCommBank;
-using MediatR;
 using static ApiClients.Extensions.Enums;
+using DataAccess.Services;
+using API.Queries;
+using MediatR;
+using ServiceLayer.DetailsService;
+using DataAccess.EfModels.Product;
+using API.DTOS.Product;
 
 namespace API.Controllers
 {
@@ -14,51 +14,41 @@ namespace API.Controllers
     [Produces("application/json")]
     public class ProductsController : ControllerBase
     {
-        private readonly IProducts _products;
-        private readonly IDataAccessLayer _dataAccessLayer;
-        private readonly IProductDetailsGetter _productDetailsGetter;
         private readonly IMediator _mediator;
+        private readonly IProductService _productService;
 
-        public ProductsController(IProducts products, IDataAccessLayer dataAccessLayer, IProductDetailsGetter productDetailsGetter, IMediator mediator)
+        public ProductsController(IMediator mediator, IProductService productService)
         {
-            _products = products;
-            _dataAccessLayer = dataAccessLayer;
-            _productDetailsGetter = productDetailsGetter;
             _mediator = mediator;
+            _productService = productService;
         }
 
         [HttpGet("apiCall", Name = "GetProducts")]
         public async Task<IActionResult> GetProductsCall()
         {
-            var banklist = Enum.GetValues(typeof(Banks));
-            foreach (var bank in banklist)
+            var banks = Enum.GetValues(typeof(Banks));
+            foreach (var bank in banks)
             {
-                var result = await _products.GetProducts(bank.ToString());
-                await _productDetailsGetter.GetProductDetailsAsync(result.Data.Products, bank.ToString());
-                await _dataAccessLayer.SaveProducts(result.Data.Products);
-                
+                var result = await _productService.SaveProductsExternalCall(bank.ToString());
+                foreach (var product in result)
+                {
+                    await _productService.SaveProductAsync(product, bank.ToString());
+                }  
             }
-            return Ok();
-        }
-
-        [HttpGet("apiCall/{productId}", Name = "Get one Product")]
-        public async Task<IActionResult> GetProductCall(string productId, string bank)
-        {
-            var result = await _products.GetProduct(productId, bank);
-            await _dataAccessLayer.SaveProduct(result.Data);
-            return Ok(result);
-        }
-
-        [HttpGet(Name = "List of All Products")]
-        public async Task<ActionResult<List<ProductDataEf>>> GetAllProducts()
-        {
             return Ok(await _mediator.Send(new QueryListAllProducts()));
         }
 
-        [HttpGet("{productId}", Name = "GetProductField")]
-        public async Task<ActionResult<ProductDataEf>> GetProduct(string productId)
+        [HttpGet(Name = "List of All Products")]
+        public async Task<IActionResult> GetAllProducts()
         {
-            return Ok(await _mediator.Send(new QueryProductDetails { ProductId = productId }));
+            return Ok(await _mediator.Send(new QueryListAllProducts())); 
+        }
+
+        [HttpGet("{productId}", Name = "GetProductField")]
+        public async Task<IActionResult> GetProduct(string productId)
+        {
+            Console.WriteLine("here"+productId);
+            return Ok(await _mediator.Send(new QueryProductDetails(productId)));
         }
 
 
